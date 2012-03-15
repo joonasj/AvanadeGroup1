@@ -1,0 +1,18 @@
+.main-menu {
+	padding:0 0 0 1em;
+	margin:0;
+	list-style:none;
+	height:43px;
+	position:relative;
+	background:transparent url(media/graphics/pro16_back.gif) repeat-x left top;
+	font-size:11px;
+	float: left;
+}
+.main-menu li {float:left; height:43px;}
+.main-menu li a {display:block; float:left; height:40px; line-height:35px; color:#888; text-decoration:none; font-family:arial, verdana, sans-serif; font-weight:bold; text-align:center; padding:0 0 0 10px; cursor:pointer; background:url(media/graphics/pro16_0a.gif) no-repeat;}
+.main-menu li a b {float:left; display:block; padding:0 60px 0 0; background:url(media/graphics/pro16_0.gif) no-repeat right top;}
+.main-menu li.current a {color:#000; background:url(media/graphics/pro16_2a.gif) no-repeat;}
+.main-menu li.current a b {color:#000; background:url(media/graphics/pro16_2.gif) no-repeat right top;}
+.main-menu li a:hover {color:#000; background: url(media/graphics/pro16_2a.gif) no-repeat;}
+.main-menu li a:hover b {color:#000; background:url(media/graphics/pro16_2.gif) no-repeat right top;}
+.main-menu li.current a:hover {color:#000; cursor:default;}

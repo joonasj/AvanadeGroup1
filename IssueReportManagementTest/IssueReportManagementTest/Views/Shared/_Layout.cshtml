@@ -15,22 +15,13 @@
 <body>
 	<div id="content">
 		<div id="toolbar">
-			
+			@RenderPage("../Shared/_LogoutPartial.cshtml")
 		</div>
 		<div id="header">
 			
 		</div>
 		<div id="main_nav">
-                <ul class="main-menu">
-                    <li><a href="@Url.Action("Index", "Home")" class="link"><b>Home</b></a></li>
-                    <li><a href="@Url.Action("About", "Home")" class="link"><b>About</b></a></li>
-                    <!--<li id="file_link">@Html.ActionLink("Home", "Index", "Home", null, new {@htmlTag = "<b>" })</li>
-                    <li id="file_link">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "link" })</li>
-                    <li id="def_link">@Html.ActionLink("About", "About", "Home", null, new { @class = "link" })</li>-->
-				    <!--<li id="def_link"><a><b>Inspect report</b></a></li>
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>-->
-                </ul>
+            @RenderPage("../Shared/_ToolsPartial.cshtml")
 		</div>
 		<div id="content_container">
 			<section>

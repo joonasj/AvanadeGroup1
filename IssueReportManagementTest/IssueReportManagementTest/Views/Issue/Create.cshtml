@@ -14,26 +14,29 @@
     <fieldset>
         <legend>Issue</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Added)
-        </div>
+        
         <div class="editor-field">
-            @Html.EditorFor(model => model.Added)
-            @Html.ValidationMessageFor(model => model.Added)
+            @Html.HiddenFor(model => model.Added, new { Value = DateTime.Today })
+        </div>
+
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.Modiefied, new { Value = DateTime.Today })
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Modiefied)
+            @Html.LabelFor(model => model.CategoryID, "Category")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Modiefied)
-            @Html.ValidationMessageFor(model => model.Modiefied)
+            @Html.DropDownList("CategoryID", String.Empty)
+            @Html.ValidationMessageFor(model => model.CategoryID)
         </div>
 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PriorityID, "Priority")
+        </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.CategoryID, new SelectList(Model.Categories,"CategoryID","CategoryName"))
-        @Html.ValidationMessageFor(model => model.CategoryID)
-
+            @Html.DropDownList("PriorityID", String.Empty)
+            @Html.ValidationMessageFor(model => model.PriorityID)
         </div>
 
         <div class="editor-label">

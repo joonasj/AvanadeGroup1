@@ -18,6 +18,12 @@
             Modiefied
         </th>
         <th>
+            Category
+        </th>
+        <th>
+            Priority
+        </th>
+        <th>
             Title
         </th>
         <th>
@@ -35,15 +41,21 @@
             @Html.DisplayFor(modelItem => item.Modiefied)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Category.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Priority.Name)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.IssueID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IssueID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IssueID })
         </td>
     </tr>
 }

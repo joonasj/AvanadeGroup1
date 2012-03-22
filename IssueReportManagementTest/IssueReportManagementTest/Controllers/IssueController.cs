@@ -13,24 +13,13 @@ namespace IssueReportManagementTest.Controllers
     {
         private IssueContext db = new IssueContext();
 
-        /*public ActionResult GetPriorities()
-        {
-             Priority viewModel = new Priority
-             {
-                  riorityRepository.GetAll()
-             }
-
-             return View(viewModel);
-        }*/
-
-
-
         //
         // GET: /Issue/
 
         public ViewResult Index()
         {
-            return View(db.Issues.ToList());
+            var issues = db.Issues.Include(i => i.Category).Include(i => i.Priority);
+            return View(issues.ToList());
         }
 
         //
@@ -47,6 +36,8 @@ namespace IssueReportManagementTest.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name");
+            ViewBag.PriorityID = new SelectList(db.Priorities, "ID", "Name");
             return View();
         } 
 
@@ -63,6 +54,8 @@ namespace IssueReportManagementTest.Controllers
                 return RedirectToAction("Index");  
             }
 
+            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", issue.CategoryID);
+            ViewBag.PriorityID = new SelectList(db.Priorities, "ID", "Name", issue.PriorityID);
             return View(issue);
         }
         
@@ -72,6 +65,8 @@ namespace IssueReportManagementTest.Controllers
         public ActionResult Edit(int id)
         {
             Issue issue = db.Issues.Find(id);
+            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", issue.CategoryID);
+            ViewBag.PriorityID = new SelectList(db.Priorities, "ID", "Name", issue.PriorityID);
             return View(issue);
         }
 
@@ -87,6 +82,8 @@ namespace IssueReportManagementTest.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", issue.CategoryID);
+            ViewBag.PriorityID = new SelectList(db.Priorities, "ID", "Name", issue.PriorityID);
             return View(issue);
         }
 

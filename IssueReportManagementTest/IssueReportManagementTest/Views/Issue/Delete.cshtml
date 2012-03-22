@@ -20,6 +20,16 @@
         @Html.DisplayFor(model => model.Modiefied)
     </div>
 
+    <div class="display-label">Category</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Category.Name)
+    </div>
+
+    <div class="display-label">Priority</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Priority.Name)
+    </div>
+
     <div class="display-label">Title</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Title)

@@ -19,6 +19,16 @@
         @Html.DisplayFor(model => model.Modiefied)
     </div>
 
+    <div class="display-label">Category</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Category.Name)
+    </div>
+
+    <div class="display-label">Priority</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Priority.Name)
+    </div>
+
     <div class="display-label">Title</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Title)
@@ -30,6 +40,6 @@
     </div>
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Edit", "Edit", new { id=Model.IssueID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

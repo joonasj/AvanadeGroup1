@@ -16,8 +16,14 @@ namespace IssueReportManagementTest.Models
 
         public IEnumerable<Category> Categories { get; set; }
 
+        [ForeignKey("Category")]
+        public int CategoryID { get; set; }
+
         public virtual Priority Priority { get; set; }
         public IEnumerable<Category> Priorities { get; set; }
+
+        [ForeignKey("Priority")]
+        public int PriorityID { get; set; }
 
         [Required]
         public string Title { get; set; }

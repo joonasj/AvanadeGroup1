@@ -77,6 +77,7 @@
     <Compile Include="Models\IssueViewModel.cs" />
     <Compile Include="Models\Priority.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\PriorityViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\default.css" />
@@ -198,6 +199,16 @@
     <Content Include="Views\Priority\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Shared\_LogOnPartialForm.cshtml" />
+    <Content Include="Views\Shared\_LogOutPartial.cshtml" />
+    <Content Include="Views\Shared\_QuickSearchPartial.cshtml" />
+    <Content Include="Views\Shared\_ToolsPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\LogOnForm.cshtml" />
+    <Content Include="Views\Account\LogOnSimple.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Views\Issue\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -211,16 +222,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Issue\Delete.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\_LogOnPartialForm.cshtml" />
-    <Content Include="Views\Shared\_LogOutPartial.cshtml" />
-    <Content Include="Views\Shared\_QuickSearchPartial.cshtml" />
-    <Content Include="Views\Shared\_ToolsPartial.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Account\LogOnForm.cshtml" />
-    <Content Include="Views\Account\LogOnSimple.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

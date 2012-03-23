@@ -11,6 +11,8 @@ namespace IssueReportManagementTest.Models
         public DateTime Added { get; set; }
         public DateTime Modiefied { get; set; }
 
+        public int State { get; set; }
+
 
         public virtual Category Category { get; set; }
 

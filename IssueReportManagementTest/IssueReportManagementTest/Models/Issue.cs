@@ -34,5 +34,7 @@ namespace IssueReportManagementTest.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
+        public string Writer { get; set; }
+
     }
 }

@@ -47,6 +47,7 @@ namespace IssueReportManagementTest.Controllers
         [HttpPost]
         public ActionResult Create(Issue issue)
         {
+            issue.Writer = System.Web.HttpContext.Current.User.Identity.Name;
             if (ModelState.IsValid)
             {
                 db.Issues.Add(issue);

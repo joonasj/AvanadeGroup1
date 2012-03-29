@@ -71,6 +71,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="DAL\IssueContext.cs" />
     <Compile Include="Models\Issue.cs" />

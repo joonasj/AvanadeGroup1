@@ -11,6 +11,7 @@ namespace IssueReportManagementTest.Models
         public DbSet<Issue> Issues { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Priority> Priorities { get; set; }
+        public DbSet<Activity> Activities { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

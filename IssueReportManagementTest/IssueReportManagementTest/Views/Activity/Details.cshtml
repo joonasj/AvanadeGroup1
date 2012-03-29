@@ -1,0 +1,35 @@
+﻿@model IssueReportManagementTest.Models.Activity
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Activity</legend>
+
+    <div class="display-label">Added</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Added)
+    </div>
+
+    <div class="display-label">Employee</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Employee)
+    </div>
+
+    <div class="display-label">Context</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Context)
+    </div>
+
+    <div class="display-label">Issue</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Issue.Title)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ActivityID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

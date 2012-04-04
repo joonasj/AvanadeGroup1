@@ -12,3 +12,10 @@ D:\Libraries\Revisions\Avanade\IssueReportManagementTest\IssueReportManagementTe
 D:\Libraries\Revisions\Avanade\IssueReportManagementTest\IssueReportManagementTest\obj\Debug\ResolveAssemblyReference.cache
 D:\Libraries\Revisions\Avanade\IssueReportManagementTest\IssueReportManagementTest\obj\Debug\IssueReportManagementTest.dll
 D:\Libraries\Revisions\Avanade\IssueReportManagementTest\IssueReportManagementTest\obj\Debug\IssueReportManagementTest.pdb
+F:\Libraries\Revision\Git\Avanade\IssueReportManagementTest\IssueReportManagementTest\bin\IssueReportManagementTest.dll
+F:\Libraries\Revision\Git\Avanade\IssueReportManagementTest\IssueReportManagementTest\bin\IssueReportManagementTest.pdb
+F:\Libraries\Revision\Git\Avanade\IssueReportManagementTest\IssueReportManagementTest\bin\EntityFramework.dll
+F:\Libraries\Revision\Git\Avanade\IssueReportManagementTest\IssueReportManagementTest\bin\EntityFramework.xml
+F:\Libraries\Revision\Git\Avanade\IssueReportManagementTest\IssueReportManagementTest\obj\Debug\ResolveAssemblyReference.cache
+F:\Libraries\Revision\Git\Avanade\IssueReportManagementTest\IssueReportManagementTest\obj\Debug\IssueReportManagementTest.dll
+F:\Libraries\Revision\Git\Avanade\IssueReportManagementTest\IssueReportManagementTest\obj\Debug\IssueReportManagementTest.pdb

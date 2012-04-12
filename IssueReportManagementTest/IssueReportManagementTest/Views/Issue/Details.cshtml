@@ -1,4 +1,4 @@
-﻿@model IssueReportManagementTest.Models.Issue
+﻿@model IssueReportManagementTest.ViewModel.IssueViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -11,40 +11,51 @@
 
     <div class="display-label">Added</div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Added)
+        @Html.DisplayFor(model => model.cissue.Added)
     </div>
 
     <div class="display-label">Modiefied</div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Modiefied)
+        @Html.DisplayFor(model => model.cissue.Modiefied)
     </div>
 
     <div class="display-label">State</div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.State)
+        @Html.DisplayFor(model => model.cissue.State)
     </div>
 
     <div class="display-label">Category</div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Category.Name)
+        @Html.DisplayFor(model => model.cissue.Category.Name)
     </div>
 
     <div class="display-label">Priority</div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Priority.Name)
+        @Html.DisplayFor(model => model.cissue.Priority.Name)
     </div>
 
     <div class="display-label">Title</div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Title)
+        @Html.DisplayFor(model => model.cissue.Title)
     </div>
 
     <div class="display-label">Description</div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Description)
+        @Html.DisplayFor(model => model.cissue.Description)
+    </div>
+
+    <div class="display-label">Activities</div>
+    <div class="display-field">
+        @foreach (var item in Model.cactivities)
+        {
+            <div class="display-activity">
+                <p>@item.Context</p>
+                <p>@item.Employee</p>
+            </div>
+        }
     </div>
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.IssueID }) |
-    @Html.ActionLink("Back to List", "Index")
+    <!--@Html.ActionLink("Edit", "Edit", new { id=Model.cissue.IssueID }) |
+    @Html.ActionLink("Back to List", "Index")-->
 </p>

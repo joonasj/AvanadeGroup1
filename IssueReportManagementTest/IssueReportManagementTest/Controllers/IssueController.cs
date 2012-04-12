@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IssueReportManagementTest.Models;
+using IssueReportManagementTest.ViewModel;
 
 namespace IssueReportManagementTest.Controllers
 { 
@@ -28,7 +29,14 @@ namespace IssueReportManagementTest.Controllers
         public ViewResult Details(int id)
         {
             Issue issue = db.Issues.Find(id);
-            return View(issue);
+
+            var viewModel = new IssueViewModel
+            {
+                cissue = issue,
+                cactivities = db.Activities.SqlQuery("SELECT * FROM Activity WHERE IssueID='"+id+"'")
+            };
+
+            return View(viewModel);
         }
 
         //

@@ -67,7 +67,7 @@
             <legend>Issue state</legend>
             <div class="display-label"><label for="issue_state">State: </label></div>
             <div class="editor-field">
-                <select>
+                <select name="new-state" id="issue_state">
                     <option value="1">Started</option>
                     <option value="2">Waiting</option>
                     <option value="3">Resolved</option>
@@ -81,7 +81,7 @@
                 <label for="new_activity">New activity:</label>
             </div>
             <div class="editor-field">
-                <textarea name="new_activity" rows="1" cols="2" id="new_activity"></textarea>
+                <textarea name="new_activity" rows="5" cols="12" id="new_activity"></textarea>
             </div>
             <div class="display-label"></div>
             <p><input type="submit" value="Add new activity" /></p>

@@ -9,21 +9,21 @@
 <fieldset>
     <legend>Issue</legend>
 
-    <div class="display-label">Added</div>
+    <div class="display-label">Title</div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.cissue.Added)
+        @Html.DisplayFor(model => model.cissue.Title)
     </div>
-
-    <div class="display-label">Modiefied</div>
+    
+    <div class="display-label">Description</div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.cissue.Modiefied)
+        @Html.DisplayFor(model => model.cissue.Description)
     </div>
-
+   
     <div class="display-label">State</div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.cissue.State)
+        @Html.DisplayFor(model => model.cstate)
     </div>
-
+    
     <div class="display-label">Category</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.cissue.Category.Name)
@@ -32,16 +32,6 @@
     <div class="display-label">Priority</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.cissue.Priority.Name)
-    </div>
-
-    <div class="display-label">Title</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.cissue.Title)
-    </div>
-
-    <div class="display-label">Description</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.cissue.Description)
     </div>
 
     <div class="display-label">Activities</div>
@@ -54,8 +44,51 @@
             </div>
         }
     </div>
+    <!--This we need to add form for issue handling-->
+
+    <div class="time-contet-issue-detail">
+        <div style="float: left;">Added</div>
+        <div style="float: left;">
+            @Html.DisplayFor(model => model.cissue.Added)
+        </div>
+        <div style="float:left;">Modiefied</div>
+        <div style="float:left;">
+            @Html.DisplayFor(model => model.cissue.Modiefied)
+        </div>
+    </div>
 </fieldset>
+@if (@HttpContext.Current.User.IsInRole("Employee") || @HttpContext.Current.User.IsInRole("Administrator"))
+{
+    using (Html.BeginForm("Update", "Issue"))
+    {
+        @Html.HiddenFor(model => model.cissue.IssueID)
+        @Html.HiddenFor(model => model.cissue.State)
+        <fieldset>
+            <legend>Issue state</legend>
+            <div class="display-label"><label for="issue_state">State: </label></div>
+            <div class="editor-field">
+                <select>
+                    <option value="1">Started</option>
+                    <option value="2">Waiting</option>
+                    <option value="3">Resolved</option>
+                    <option value="4">Closed</option>
+                </select>
+             </div>
+        </fieldset>
+        <fieldset>
+            <legend>Activity</legend>
+            <div class="display-label">
+                <label for="new_activity">New activity:</label>
+            </div>
+            <div class="editor-field">
+                <textarea name="new_activity" rows="1" cols="2" id="new_activity"></textarea>
+            </div>
+            <div class="display-label"></div>
+            <p><input type="submit" value="Add new activity" /></p>
+        </fieldset>
+    }
+}
 <p>
-    <!--@Html.ActionLink("Edit", "Edit", new { id=Model.cissue.IssueID }) |
+    <!--@Html.ActionLink("Edit", "Edit", new { id = Model.cissue.IssueID }) |
     @Html.ActionLink("Back to List", "Index")-->
 </p>

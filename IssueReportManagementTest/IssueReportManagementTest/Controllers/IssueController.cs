@@ -29,11 +29,34 @@ namespace IssueReportManagementTest.Controllers
         public ViewResult Details(int id)
         {
             Issue issue = db.Issues.Find(id);
-
+            string current_state;
+            switch (issue.State)
+            {
+                case 0:
+                    current_state = "Not started";
+                    break;
+                case 1:
+                    current_state = "Started";
+                    break;
+                case 2:
+                    current_state = "Waiting";
+                    break;
+                case 3:
+                    current_state = "Resolved";
+                    break;
+                case 4:
+                    current_state = "Closed";
+                    break;
+                default:
+                    current_state = "Error";
+                    break;
+            }
             var viewModel = new IssueViewModel
             {
                 cissue = issue,
+                cstate = current_state,
                 cactivities = db.Activities.SqlQuery("SELECT * FROM Activity WHERE IssueID='"+id+"'")
+                
             };
 
             return View(viewModel);
@@ -94,6 +117,14 @@ namespace IssueReportManagementTest.Controllers
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", issue.CategoryID);
             ViewBag.PriorityID = new SelectList(db.Priorities, "ID", "Name", issue.PriorityID);
             return View(issue);
+        }
+
+        [HttpPost]
+        public ActionResult Update()
+        {
+            string ac_content = Request['a'];
+            int id = System.Web.HttpRequest.['b'];
+            return RedirectToAction("Index");
         }
 
         //

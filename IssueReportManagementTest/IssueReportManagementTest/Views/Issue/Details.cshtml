@@ -9,51 +9,51 @@
 <fieldset>
     <legend>Issue</legend>
 
-    <div class="display-label">Title</div>
+    <div class="display-label">Title:</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.cissue.Title)
     </div>
     
-    <div class="display-label">Description</div>
+    <div class="display-label">Description:</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.cissue.Description)
     </div>
    
-    <div class="display-label">State</div>
+    <div class="display-label">State:</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.cstate)
     </div>
     
-    <div class="display-label">Category</div>
+    <div class="display-label">Category:</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.cissue.Category.Name)
     </div>
 
-    <div class="display-label">Priority</div>
+    <div class="display-label">Priority:</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.cissue.Priority.Name)
     </div>
 
-    <div class="display-label">Activities</div>
-    <div class="display-field">
+    <div class="display-label">Activities:</div>
+    <div class="activity-container">
         @foreach (var item in Model.cactivities)
         {
             <div class="display-activity">
                 <p>@item.Context</p>
-                <p>@item.Employee</p>
+                <p><i>@item.Employee @item.Added.ToString("dd.MM.yy")</i></p>
             </div>
         }
     </div>
     <!--This we need to add form for issue handling-->
 
-    <div class="time-contet-issue-detail">
-        <div style="float: left;">Added</div>
+    <div class="time-content-issue-detail">
+        <div style="float: left;">Added: </div>
         <div style="float: left;">
-            @Html.DisplayFor(model => model.cissue.Added)
+            @Model.cissue.Added.ToString("dd.MM.yy")
         </div>
-        <div style="float:left;">Modiefied</div>
+        <div style="float:left; margin-left: 10px;">Modified: </div>
         <div style="float:left;">
-            @Html.DisplayFor(model => model.cissue.Modiefied)
+            @Model.cissue.Modiefied.ToString("dd.MM.yy")
         </div>
     </div>
 </fieldset>

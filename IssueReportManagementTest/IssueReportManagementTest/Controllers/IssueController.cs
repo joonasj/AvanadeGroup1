@@ -18,10 +18,82 @@ namespace IssueReportManagementTest.Controllers
         //
         // GET: /Issue/
 
-        public ViewResult Index()
+        public ViewResult Index(string mode)
         {
-            var issues = db.Issues.Include(i => i.Category).Include(i => i.Priority);
-            return View(issues.ToList());
+            //var issues = db.Issues.Include(i => i.Category).Include(i => i.Priority);
+            string query;
+            //ViewBag.Message = "Welcome to ASP.NET MVC!";
+            if (System.Web.HttpContext.Current.User.IsInRole("Customer"))
+            {
+                string cuser = System.Web.HttpContext.Current.User.Identity.Name;
+
+                if (mode != null)
+                {
+                    switch (mode)
+                    {
+                        case "state":
+                            query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' ORDER BY State ASC";
+                            break;
+                        case "cat":
+                            query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' ORDER BY CategoryID ASC";
+                            break;
+                        case "priority":
+                            query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' ORDER BY PriorityID ASC";
+                            break;
+                        case "title":
+                            query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' ORDER BY Title ASC";
+                            break;
+                        default:
+                            query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' ORDER BY State ASC";
+                            break;
+                    }
+                }
+                else
+                {
+                    query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' ORDER BY State ASC";
+                }
+                var listIssueviewModel = new IssueListViewModel
+                {
+                    lissue = db.Issues.SqlQuery(query)
+                };
+                return View(listIssueviewModel);
+            }
+            else
+            {
+                if (mode != null)
+                {
+                    switch (mode)
+                    {
+                        case "state":
+                            query = "SELECT * FROM Issue ORDER BY State ASC";
+                            break;
+                        case "cat":
+                            query = "SELECT * FROM Issue ORDER BY CategoryID ASC";
+                            break;
+                        case "priority":
+                            query = "SELECT * FROM Issue ORDER BY PriorityID ASC";
+                            break;
+                        case "title":
+                            query = "SELECT * FROM Issue ORDER BY Title ASC";
+                            break;
+                        default:
+                            query = "SELECT * FROM Issue ORDER BY State ASC";
+                            break;
+                    }
+                }
+                else
+                {
+                    query = "SELECT * FROM Issue ORDER BY State ASC";
+                }
+                var listIssueviewModel = new IssueListViewModel
+                {
+                    lissue = db.Issues.SqlQuery(query)
+                };
+                return View(listIssueviewModel);
+
+            }
+            
+            //return View(issues.ToList());
         }
 
         //
@@ -160,23 +232,25 @@ namespace IssueReportManagementTest.Controllers
                             break;
                     }
                 }
-                string issue_query = "UPDATE Issue SET State='" + n_state + "', Modiefied='" + mod + "'";
-                string activity_query = "INSERT INTO Activity (IssueID, Added, Employee, Context) VALUES ('" + id + "', '" + mod + "', '" + c_employee + "', '" + ac_content + "')";
-                //db.Issues.SqlQuery(issue_query);
-                //db.SaveChanges();
-                //db.Activities.SqlQuery(activity_query);
-                //db.Database.SqlQuery(issue_query);
-                //db.Database.SqlQuery(activity_query);
-                //System.Data.Entity.Database.SqlQuery();
-                //db.Activities.S
-                //SqlConnection cn = new SqlConnection("IRM.sdf");
-                //cn.Open();
-                SqlCommand icmd = new SqlCommand(issue_query);
+
+                var issue_sql = @"UPDATE [Issue] SET State = {0}, Modiefied = {1} WHERE IssueID = {2}";
+                var activity_sql = @"INSERT INTO [Activity] (IssueID, Added, Employee, Context) VALUES ({0}, {1}, {2}, {3})";
+                //string issue_query = "UPDATE Issue SET State='" + n_state + "', Modiefied='" + mod + "'";
+                //string activity_query = "INSERT INTO Activity (IssueID, Added, Employee, Context) VALUES ('" + id + "', '" + mod + "', '" + c_employee + "', '" + ac_content + "')";
+                //SqlCommand icmd = new SqlCommand(issue_query);
+                db.Database.ExecuteSqlCommand(issue_sql, n_state, mod, id);
+                db.Database.ExecuteSqlCommand(activity_sql, id, mod, c_employee, ac_content);
+                //db.Database.ExecuteSqlCommand(issue_query);
+                //db.Database.ExecuteSqlCommand(activity_query);
+                //db.Database.ExecuteSqlCommand(icmd);
+                //IEnumerable<IssueContext> ico = db.
+                
                 //icmd.Prepare();
-                icmd.BeginExecuteNonQuery();
+                
+                //icmd.BeginExecuteNonQuery();
                 //icmd.Transaction.Commit();
                 //db.SaveChanges();
-                SqlCommand acmd = new SqlCommand(activity_query);
+                //SqlCommand acmd = new SqlCommand(activity_query);
                 //return View(activity_query);
                 return RedirectToAction("Index");
 

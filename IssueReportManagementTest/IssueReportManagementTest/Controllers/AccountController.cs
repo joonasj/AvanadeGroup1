@@ -38,7 +38,8 @@ namespace IssueReportManagementTest.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Home");
+                        //return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Issue");
                     }
                 }
                 else
@@ -58,7 +59,7 @@ namespace IssueReportManagementTest.Controllers
         {
             FormsAuthentication.SignOut();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("LogOn", "Account");
         }
 
         //

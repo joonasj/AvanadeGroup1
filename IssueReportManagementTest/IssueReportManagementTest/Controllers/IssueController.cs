@@ -211,7 +211,7 @@ namespace IssueReportManagementTest.Controllers
                 //Day when activity has been added
                 string mod = DateTime.Today.ToString("dd.MM.yyyy");
                 //Automatic message if activity text is null
-                if (ac_content == null)
+                if (ac_content == null || ac_content == "")
                 {
                     switch (n_state)
                     {

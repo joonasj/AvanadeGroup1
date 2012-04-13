@@ -14,7 +14,7 @@ namespace IssueReportManagementTest.Controllers
 
         public ActionResult Index(string mode)
         {
-            if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+            /*if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
             {
 
                 string query;
@@ -88,6 +88,14 @@ namespace IssueReportManagementTest.Controllers
                     return View(listIssueviewModel);
 
                 }
+            }
+            else
+            {
+                return RedirectToAction("LogOn", "Account");
+            }*/
+            if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Issue");
             }
             else
             {

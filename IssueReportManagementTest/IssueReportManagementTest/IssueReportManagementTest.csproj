@@ -202,7 +202,7 @@
     <Content Include="Views\Priority\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\_LogOnPartialForm.cshtml" />
+    <None Include="Views\Shared\_LogOnPartialForm.cshtml~" />
     <Content Include="Views\Shared\_LogOutPartial.cshtml" />
     <Content Include="Views\Shared\_QuickSearchPartial.cshtml" />
     <Content Include="Views\Shared\_ToolsPartial.cshtml" />

@@ -254,7 +254,7 @@
 
 .table-row-odd:hover, .table-row-even:hover
 {
-    background: #FF5309;
+    background: #FF5309 url(media/graphics/issue-list-td-bg.jpg) repeat-x;
     cursor: pointer;
 }
 

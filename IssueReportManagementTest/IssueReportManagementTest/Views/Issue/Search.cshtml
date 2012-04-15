@@ -37,7 +37,7 @@
 @{ var odd = true; }
 @foreach (var item in Model.lissue)
 {
-    <tr class="@(odd ? "table-row-odd" : "table-row-even")" onclick="window.location='Issue/Details/@(item.IssueID)'">
+    <tr class="@(odd ? "table-row-odd" : "table-row-even")" onclick="window.location='../Issue/Details/@(item.IssueID)'">
         <td>
             @Html.DisplayFor(model => item.IssueID)
         </td>

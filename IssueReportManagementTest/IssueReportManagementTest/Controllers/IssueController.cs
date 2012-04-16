@@ -8,12 +8,16 @@ using System.Web.Mvc;
 using IssueReportManagementTest.Models;
 using IssueReportManagementTest.ViewModel;
 using System.Data.SqlClient;
+using System.Web.Security;
+using System.Net.Mail;
+using System.Net;
 
 namespace IssueReportManagementTest.Controllers
 { 
     public class IssueController : Controller
     {
         private IssueContext db = new IssueContext();
+        private SmtpClient smtps = new SmtpClient("smtp.gmail.com", 587);
 
         //
         // GET: /Issue/
@@ -226,11 +230,43 @@ namespace IssueReportManagementTest.Controllers
                             break;
                         case 4:
                             ac_content = "Issue has been archived by " + c_employee + ".";
+                            
+                            //System.Web.HttpContext.Current.User.Identity.
                             break;
                         default:
                             ac_content = "Error has happened. Contact immediately to site administration.";
                             break;
                     }
+                }
+
+                if (n_state == 4)
+                {
+                    //If issue has been closed, this message is sent
+                    //Customer data
+                    Issue cu_issue = new Issue();
+                    cu_issue = db.Issues.Find(id);
+                    //customer info
+                    MembershipUser cms = Membership.GetUser(cu_issue.Writer);
+                    //employee info
+                    MembershipUser ems = Membership.GetUser(c_employee);
+                    //mail(from, to)
+                    MailMessage e_msg = new MailMessage(ems.Email, cms.Email);
+                    //Subject
+                    e_msg.Subject = "IRM: Issue "+id+" has been archived";
+                    //Body
+                    e_msg.Body = "Dear customer "+cu_issue.Writer+".\nYour issue id: "+cu_issue.IssueID+" has been resolved and archived by our employee "+c_employee+".\n"+c_employee+" message: "+ac_content+".\nContact: "+ems.Email+".";
+                    
+                    //Definitions
+
+                    //System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
+                    
+                    smtps.UseDefaultCredentials = false;
+                    smtps.Credentials = new NetworkCredential("avanadg1@gmail.com", "3l173h4x");
+                    smtps.EnableSsl = true;
+                    //Send
+                    smtps.Send(e_msg);
+                    //client.Send(e_msg);
+
                 }
 
                 var issue_sql = @"UPDATE [Issue] SET State = {0}, Modiefied = {1} WHERE IssueID = {2}";

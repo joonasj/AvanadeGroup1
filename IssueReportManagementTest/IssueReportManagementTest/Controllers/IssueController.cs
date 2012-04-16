@@ -285,6 +285,30 @@ namespace IssueReportManagementTest.Controllers
             return RedirectToAction("Index");
         }
 
+        //Search issues
+        // POST: /Issue/Search
+        [HttpPost]
+        public ActionResult Search(FormCollection c)
+        {
+            string query = "";
+            string s = c["search"];
+            string c_user = System.Web.HttpContext.Current.User.Identity.Name;
+            if (System.Web.HttpContext.Current.User.IsInRole("Customer"))
+            {
+                query = "SELECT * FROM Issue WHERE IssueID LIKE '%"+s+"%' OR Title LIKE '%"+s+"%' OR Description LIKE '%"+s+"%' AND Writer='" + c_user + "'";
+            }
+            else
+            {
+                query = "SELECT * FROM Issue WHERE IssueID LIKE '%" + s + "%' OR Title LIKE '%" + s + "%' OR Description LIKE '%" + s + "%' OR Writer LIKE '%"+s+"%'";
+            }
+            var viewModel = new IssueListViewModel
+            {
+                lissue = db.Issues.SqlQuery(query)
+            };
+
+            return View(viewModel);
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

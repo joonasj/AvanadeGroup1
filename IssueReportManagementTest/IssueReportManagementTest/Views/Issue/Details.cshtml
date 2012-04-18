@@ -38,6 +38,7 @@
         @{
             switch(Model.cissue.IssueFileExtension){
                 case "":
+                    <text>&nbsp;</text>
                 break;
                 case "image/jpeg":
                      <a href="../@Model.cissue.IssueFileURL" title="JPG file"><img src="../../Content/file_extension_icons/image.png" alt="JPG" /></a>

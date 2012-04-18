@@ -182,21 +182,28 @@ namespace IssueReportManagementTest.Controllers
             issue.State = 0;
 
             //HttpPostedFileBase attachment = c["IssueFile"];
-
-            if (IssueFile.ContentLength > 0)
+            if (IssueFile != null)
             {
-                var fileName = Path.GetFileName(IssueFile.FileName);
-                var path = Path.Combine(Server.MapPath("../Content/uploads"), fileName);
-                IssueFile.SaveAs(path);
-                issue.IssueFileURL = "../Content/uploads/" + fileName;
-                //Type file_ext = IssueFile.GetType();
-                issue.IssueFileExtension = IssueFile.ContentType;
+                if (IssueFile.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(IssueFile.FileName);
+                    var path = Path.Combine(Server.MapPath("../Content/uploads"), fileName);
+                    IssueFile.SaveAs(path);
+                    issue.IssueFileURL = "../Content/uploads/" + fileName;
+                    //Type file_ext = IssueFile.GetType();
+                    issue.IssueFileExtension = IssueFile.ContentType;
 
+                }
+                else
+                {
+                    issue.IssueFileExtension = "";
+                    issue.IssueFileURL = "";
+                }
             }
             else
             {
-                issue.IssueFileExtension = "";
                 issue.IssueFileURL = "";
+                issue.IssueFileExtension = "";
             }
 
             issue.Writer = System.Web.HttpContext.Current.User.Identity.Name;

@@ -37,5 +37,8 @@ namespace IssueReportManagementTest.Models
 
         public string Writer { get; set; }
 
+        public string IssueFileURL { get; set; }
+        public string IssueFileExtension { get; set; }
+
     }
 }

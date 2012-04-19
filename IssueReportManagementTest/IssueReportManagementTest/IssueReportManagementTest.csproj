@@ -85,9 +85,19 @@
   <ItemGroup>
     <Content Include="Content\default.css" />
     <Content Include="Content\default2.css" />
+    <Content Include="Content\file_extension_icons\calc.png" />
+    <Content Include="Content\file_extension_icons\excel.png" />
+    <Content Include="Content\file_extension_icons\image.png" />
+    <Content Include="Content\file_extension_icons\impress.png" />
+    <Content Include="Content\file_extension_icons\pdf.png" />
+    <Content Include="Content\file_extension_icons\powerpoint.png" />
+    <Content Include="Content\file_extension_icons\unknown.png" />
+    <Content Include="Content\file_extension_icons\word.png" />
+    <Content Include="Content\file_extension_icons\writer.png" />
     <Content Include="Content\main_menu.css" />
     <Content Include="Content\main_menu2.css" />
     <Content Include="Content\media\graphics\body_bg.jpg" />
+    <Content Include="Content\media\graphics\issue-list-td-bg.jpg" />
     <Content Include="Content\media\graphics\logo.jpg" />
     <Content Include="Content\media\graphics\logout.png" />
     <Content Include="Content\media\graphics\pro16_0.gif" />

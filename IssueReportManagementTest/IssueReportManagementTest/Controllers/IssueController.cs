@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 using System.Web.Security;
 using System.Net.Mail;
 using System.Net;
+using System.IO;
 
 namespace IssueReportManagementTest.Controllers
 { 
@@ -152,7 +153,7 @@ namespace IssueReportManagementTest.Controllers
         //
         // POST: /Issue/Create
 
-        [HttpPost]
+        /*[HttpPost]
         public ActionResult Create(Issue issue)
         {
             issue.Writer = System.Web.HttpContext.Current.User.Identity.Name;
@@ -161,6 +162,57 @@ namespace IssueReportManagementTest.Controllers
                 db.Issues.Add(issue);
                 db.SaveChanges();
                 return RedirectToAction("Index");  
+            }
+
+            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", issue.CategoryID);
+            ViewBag.PriorityID = new SelectList(db.Priorities, "ID", "Name", issue.PriorityID);
+            return View(issue);
+        }*/
+
+        [HttpPost]
+        public ActionResult Create(FormCollection c, HttpPostedFileBase IssueFile)
+        {
+            Issue issue = new Issue();
+            issue.Title = c["Title"];
+            issue.Added = System.DateTime.Today;
+            issue.Modiefied = System.DateTime.Today;
+            issue.PriorityID = System.Convert.ToInt16(c["PriorityID"]);
+            issue.CategoryID = System.Convert.ToInt16(c["CategoryID"]);
+            issue.Description = c["Description"];
+            issue.State = 0;
+
+            //HttpPostedFileBase attachment = c["IssueFile"];
+            if (IssueFile != null)
+            {
+                if (IssueFile.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(IssueFile.FileName);
+                    var path = Path.Combine(Server.MapPath("../Content/uploads"), fileName);
+                    IssueFile.SaveAs(path);
+                    issue.IssueFileURL = "../Content/uploads/" + fileName;
+                    //Type file_ext = IssueFile.GetType();
+                    issue.IssueFileExtension = IssueFile.ContentType;
+
+                }
+                else
+                {
+                    issue.IssueFileExtension = "";
+                    issue.IssueFileURL = "";
+                }
+            }
+            else
+            {
+                issue.IssueFileURL = "";
+                issue.IssueFileExtension = "";
+            }
+
+            issue.Writer = System.Web.HttpContext.Current.User.Identity.Name;
+            //issue.IssueFileURL = IssueFile.FileName;
+            if (ModelState.IsValid)
+            {
+                db.Issues.Add(issue);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
 
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", issue.CategoryID);
@@ -331,7 +383,7 @@ namespace IssueReportManagementTest.Controllers
             string c_user = System.Web.HttpContext.Current.User.Identity.Name;
             if (System.Web.HttpContext.Current.User.IsInRole("Customer"))
             {
-                query = "SELECT * FROM Issue WHERE IssueID LIKE '%"+s+"%' OR Title LIKE '%"+s+"%' OR Description LIKE '%"+s+"%' AND Writer='" + c_user + "'";
+                query = "SELECT * FROM Issue WHERE (IssueID LIKE '%"+s+"%' OR Title LIKE '%"+s+"%' OR Description LIKE '%"+s+"%') AND Writer='" + c_user + "'";
             }
             else
             {

@@ -38,6 +38,46 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.cissue.Writer)
     </div>
+    <div class="display-label">Attachment:</div>
+    <div class="display-field">
+        @{
+            switch(Model.cissue.IssueFileExtension){
+                case "":
+                    <text>&nbsp;</text>
+                break;
+                case "image/jpeg":
+                     <a href="../@Model.cissue.IssueFileURL" title="JPG file"><img src="../../Content/file_extension_icons/image.png" alt="JPG" /></a>
+                break;
+                case "image/png":
+                     <a href="../@Model.cissue.IssueFileURL" title="PNG file"><img src="../../Content/file_extension_icons/image.png" alt="PNG" /></a>
+                break;
+                case "application/pdf":
+                     <a href="../@Model.cissue.IssueFileURL" title="PDF file"><img src="../../Content/file_extension_icons/pdf.png" alt="PDF" /></a>
+                break;
+                case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+                     <a href="../@Model.cissue.IssueFileURL" title="Word file"><img src="../../Content/file_extension_icons/word.png" alt="Word" /></a>
+                break;
+                case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+                     <a href="../@Model.cissue.IssueFileURL" title="Excel file"><img src="../../Content/file_extension_icons/excel.png" alt="Excel" /></a>
+                break;
+                case "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+                     <a href="../@Model.cissue.IssueFileURL" title="Power Point file"><img src="../../Content/file_extension_icons/powerpoint.png" alt="Power Point" /></a>
+                break;
+                case "application/vnd.oasis.opendocument.text":
+                     <a href="../@Model.cissue.IssueFileURL" title="Writer file"><img src="../../Content/file_extension_icons/writer.png" alt="Writer" /></a>
+                break;
+                case "application/vnd.oasis.opendocument.spreadsheet":
+                     <a href="../@Model.cissue.IssueFileURL" title="Calc file"><img src="../../Content/file_extension_icons/calc.png" alt="Calc" /></a>
+                break;
+                case "application/vnd.oasis.opendocument.presentation":
+                     <a href="../@Model.cissue.IssueFileURL" title="Impress file"><img src="../../Content/file_extension_icons/impress.png" alt="Impress" /></a>
+                break;
+                default:
+                     <a href="../@Model.cissue.IssueFileURL" title="Unknown file"><img src="../../Content/file_extension_icons/unknown.png" alt="Unknown" /></a>
+                break;
+            }
+        }
+    </div>
 
     <div class="display-label">Activities:</div>
     <div class="activity-container">
@@ -49,7 +89,6 @@
             </div>
         }
     </div>
-    <!--This we need to add form for issue handling-->
 
     <div class="time-content-issue-detail">
         <div style="float: left;">Added: </div>

@@ -131,13 +131,12 @@
 #content_container {
 	font-family: arial;
 	font-size: 14px;
-	padding: 5px 10px 5px 10px;
-	width: 734px;
+	padding: 5px;
 }
 
 #content_container section 
 {
-    width: 736px;
+    width: 756px;
 }
 
 .er {
@@ -228,7 +227,7 @@
 
 .list-issues-table 
 {
-    width: 100%;
+    width: 756px;
 }
 
 .list-issues-table tr td 
@@ -314,16 +313,4 @@
 .time-content-issue-detail 
 {
     margin-top: 10px;
-}
-
-
-#content_container #Description 
-{
-    width: 600px;
-    height: 112px;
-}
-
-#content_container section select, #content_container section #Title
-{
-    width: 175px;
 }

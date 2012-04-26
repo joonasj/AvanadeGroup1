@@ -262,6 +262,7 @@
 .list-issue-header 
 {
     cursor: default;
+    text-align: left;
 }
 
 .display-label 
@@ -326,4 +327,9 @@
 #content_container section select, #content_container section #Title
 {
     width: 175px;
+}
+
+#content_container section img 
+{
+    border: none; /*For IE*/
 }

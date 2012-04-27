@@ -37,19 +37,12 @@
 @{ var odd = true; }
 @foreach (var item in Model.lissue)
 {
-    <tr class="@(odd ? "table-row-odd" : "table-row-even")" onclick="window.location='Details/@(item.IssueID)'" title="@(item.Title)">
+    <tr class="@(odd ? "table-row-odd" : "table-row-even")" onclick="window.location='../Issue/Details/@(item.IssueID)'">
         <td>
             @Html.DisplayFor(model => item.IssueID)
         </td>
         <td>
-            @if (item.Title.Length > 25)
-            {
-                string issue_title = item.Title.Substring(0, 22)+"...";
-                @Html.ActionLink(issue_title, "Details/" + item.IssueID, "Issue");
-            }
-            else {
-                @Html.ActionLink(item.Title, "Details/" + item.IssueID, "Issue");
-            }
+            @Html.ActionLink(item.Title, "Details/" + item.IssueID, "Issue")
         </td>
         <td>
             @{

@@ -19,3 +19,10 @@ F:\Libraries\Revision\Git\Avanade\IssueReportManagementTest\IssueReportManagemen
 F:\Libraries\Revision\Git\Avanade\IssueReportManagementTest\IssueReportManagementTest\obj\Debug\ResolveAssemblyReference.cache
 F:\Libraries\Revision\Git\Avanade\IssueReportManagementTest\IssueReportManagementTest\obj\Debug\IssueReportManagementTest.dll
 F:\Libraries\Revision\Git\Avanade\IssueReportManagementTest\IssueReportManagementTest\obj\Debug\IssueReportManagementTest.pdb
+C:\Users\Iiro\Downloads\joonasj-AvanadeGroup1-3a243a2\joonasj-AvanadeGroup1-3a243a2\IssueReportManagementTest\IssueReportManagementTest\bin\IssueReportManagementTest.dll
+C:\Users\Iiro\Downloads\joonasj-AvanadeGroup1-3a243a2\joonasj-AvanadeGroup1-3a243a2\IssueReportManagementTest\IssueReportManagementTest\bin\IssueReportManagementTest.pdb
+C:\Users\Iiro\Downloads\joonasj-AvanadeGroup1-3a243a2\joonasj-AvanadeGroup1-3a243a2\IssueReportManagementTest\IssueReportManagementTest\bin\EntityFramework.dll
+C:\Users\Iiro\Downloads\joonasj-AvanadeGroup1-3a243a2\joonasj-AvanadeGroup1-3a243a2\IssueReportManagementTest\IssueReportManagementTest\bin\EntityFramework.xml
+C:\Users\Iiro\Downloads\joonasj-AvanadeGroup1-3a243a2\joonasj-AvanadeGroup1-3a243a2\IssueReportManagementTest\IssueReportManagementTest\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Iiro\Downloads\joonasj-AvanadeGroup1-3a243a2\joonasj-AvanadeGroup1-3a243a2\IssueReportManagementTest\IssueReportManagementTest\obj\Debug\IssueReportManagementTest.dll
+C:\Users\Iiro\Downloads\joonasj-AvanadeGroup1-3a243a2\joonasj-AvanadeGroup1-3a243a2\IssueReportManagementTest\IssueReportManagementTest\obj\Debug\IssueReportManagementTest.pdb

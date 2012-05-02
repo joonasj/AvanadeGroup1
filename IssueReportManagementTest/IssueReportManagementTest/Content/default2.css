@@ -314,3 +314,24 @@
 {
     margin-top: 10px;
 }
+
+#content_container section #Title, #content_container section #CategoryID, #content_container section #PriorityID
+{
+    width: 300px;
+}
+
+#Description 
+{
+    width: 500px;
+    height: 225px;
+}
+
+#content_container section a:link, #content_container section a:visited 
+{
+    color: #FF5309;
+}
+
+#content_container section a:hover 
+{
+    color: #000;
+}

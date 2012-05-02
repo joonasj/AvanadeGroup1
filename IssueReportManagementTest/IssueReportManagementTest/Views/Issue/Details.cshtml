@@ -50,26 +50,32 @@
                      <a href="../@Model.cissue.IssueFileURL" title="PDF file"><img src="../../Content/file_extension_icons/pdf.png" alt="PDF" /></a>
                 break;
                 case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
-                     <a href="../@Model.cissue.IssueFileURL" title="Word file"><img src="../../Content/file_extension_icons/word.png" alt="Word" /></a>
+                     <a href="../@Model.cissue.IssueFileURL" title="Excel file"><img src="../../Content/file_extension_icons/excel.png" alt="Excel" /></a>
+                break;
+                case "application/vnd.ms-excel":
+                    <a href="../@Model.cissue.IssueFileURL" title="Excel file"><img src="../../Content/file_extension_icons/excel.png" alt="Excel" /></a>
                 break;
                 case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-                     <a href="../@Model.cissue.IssueFileURL" title="Excel file"><img src="../../Content/file_extension_icons/excel.png" alt="Excel" /></a>
+                    <a href="../@Model.cissue.IssueFileURL" title="Word file"><img src="../../Content/file_extension_icons/word.png" alt="Word" /></a>     
+                break;
+                case "application/msword":
+                    <a href="../@Model.cissue.IssueFileURL" title="Word file"><img src="../../Content/file_extension_icons/word.png" alt="Word" /></a>     
                 break;
                 case "application/vnd.openxmlformats-officedocument.presentationml.presentation":
                      <a href="../@Model.cissue.IssueFileURL" title="Power Point file"><img src="../../Content/file_extension_icons/powerpoint.png" alt="Power Point" /></a>
-                break;
+                            break;
                 case "application/vnd.oasis.opendocument.text":
                      <a href="../@Model.cissue.IssueFileURL" title="Writer file"><img src="../../Content/file_extension_icons/writer.png" alt="Writer" /></a>
-                break;
+                            break;
                 case "application/vnd.oasis.opendocument.spreadsheet":
                      <a href="../@Model.cissue.IssueFileURL" title="Calc file"><img src="../../Content/file_extension_icons/calc.png" alt="Calc" /></a>
-                break;
+                            break;
                 case "application/vnd.oasis.opendocument.presentation":
                      <a href="../@Model.cissue.IssueFileURL" title="Impress file"><img src="../../Content/file_extension_icons/impress.png" alt="Impress" /></a>
-                break;
+                            break;
                 default:
                      <a href="../@Model.cissue.IssueFileURL" title="Unknown file"><img src="../../Content/file_extension_icons/unknown.png" alt="Unknown" /></a>
-                break;
+                            break;
             }
         }
     </div>

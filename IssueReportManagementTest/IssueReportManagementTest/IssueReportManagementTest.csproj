@@ -99,6 +99,7 @@
     <Content Include="Content\media\graphics\pro16_back.gif" />
     <Content Include="Content\media\graphics\search_icon.png" />
     <Content Include="Content\media\graphics\toolbar_bg.jpg" />
+    <Content Include="Content\Scripts\avanade_scripts.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />

@@ -26,8 +26,9 @@ namespace IssueReportManagementTest.Controllers
         public ViewResult Index(string mode)
         {
             //var issues = db.Issues.Include(i => i.Category).Include(i => i.Priority);
-            string query;
-            string a_query;//for "closed" issues
+            //string query = "SELECT * FROM Issue WHERE Writer='" + System.Web.HttpContext.Current.User.Identity.Name + "' ORDER BY State ASC";
+            string query = "";
+            string a_query = "";//for "closed" issues
             //ViewBag.Message = "Welcome to ASP.NET MVC!";
             if (System.Web.HttpContext.Current.User.IsInRole("Customer"))
             {
@@ -61,12 +62,13 @@ namespace IssueReportManagementTest.Controllers
                 }
                 else
                 {
-                    query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' WHERE State<'4' ORDER BY State ASC";
+                    query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State<'4' ORDER BY State ASC";
                     a_query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State='4' ORDER BY State ASC";
                 }
                 var listIssueviewModel = new IssueListViewModel
                 {
-                    lissue = db.Issues.SqlQuery(query)
+                    lissue = db.Issues.SqlQuery(query),
+                    a_lissue = db.Issues.SqlQuery(a_query)
                 };
                 return View(listIssueviewModel);
             }

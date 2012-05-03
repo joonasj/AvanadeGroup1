@@ -3,7 +3,8 @@
 @{
     ViewBag.Title = "Index";
 }
-<p>Welcome <b>@User.Identity.Name</b>!</p>
+
+
 
 <p class="sub-link-content">
     @Html.ActionLink("Add new issue", "Create")
@@ -90,8 +91,9 @@
 }
 
 </table>
-<p>Archived messages</p>
- <table class="list-issues-table" cellspacing="0">
+<p id="open-archived-issues" title="Press to view archived messages">Archived issues</p>
+<div id="archived-issues">
+ <table class="list-issues-table" cellspacing="0" >
     <tr class="list-issue-header">
         <th>
             ID
@@ -172,3 +174,14 @@
 }
 
 </table>
+</div>
+<script type="text/javascript">
+    $("#open-archived-issues").live('click', function () {
+        //alert("Daapa daapa");
+        if ($("#archived-issues").is(":hidden")) {
+            $("#archived-issues").slideDown("fast");
+        } else {
+            $("#archived-issues").hide();
+        }
+    });
+</script>

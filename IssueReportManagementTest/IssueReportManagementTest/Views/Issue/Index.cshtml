@@ -46,7 +46,7 @@
         <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @Html.DisplayFor(model => item.IssueID)
         </td>
-        <td>
+        <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @Html.ActionLink(item.Title, "Details/" + item.IssueID, "Issue")
         </td>
         <td onclick="window.location='Issue/Details/@(item.IssueID)'">
@@ -96,7 +96,7 @@
 }
 
 </table>
-<p id="open-archived-issues" title="Press to view archived messages"><img src="../../Content/media/graphics/folder_add_48.png" alt="" />Archived issues</p>
+<p id="open-archived-issues" title="Press to view archived messages" onload="hideArchive()"><img src="../../Content/media/graphics/folder_add_48.png" alt="" />Archived issues</p>
 <div id="archived-issues">
  <table class="list-issues-table" cellspacing="0" >
     <tr class="list-issue-header">
@@ -183,6 +183,7 @@
 </table>
 </div>
 <script type="text/javascript">
+    $("#archived-issues").addClass("hide-archived");
     $("#open-archived-issues").live('click', function () {
         //alert("Daapa daapa");
         if ($("#archived-issues").is(":hidden")) {
@@ -192,5 +193,5 @@
         }
     });
 </script>
-    <p><input type="submit" value="Get reports" /></p>
+    <p><input type="image" src="../../Content/media/graphics/paper_content_chart_48.png" title="Get reports" style="float: left;" /><input type="submit" value="Get reports" style="margin-top: 10px;" /></p>
 }

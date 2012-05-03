@@ -25,6 +25,7 @@ namespace IssueReportManagementTest.Controllers
 
         public ViewResult Index(string mode)
         {
+
             //var issues = db.Issues.Include(i => i.Category).Include(i => i.Priority);
             //string query = "SELECT * FROM Issue WHERE Writer='" + System.Web.HttpContext.Current.User.Identity.Name + "' ORDER BY State ASC";
             string query = "";

@@ -14,6 +14,14 @@
     <script src="@Url.Content("~/Content/Scripts/avanade_scripts.js")" type="text/javascript"></script>
     <!--<script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>-->
     <script type="text/javascript">
+        function showPrinter() {
+            $(".hide-printer").removeClass("hide-printer");
+        }
+
+        function hideArchive() {
+            $("#archived-issues").addClass("hide-archived");
+        }
+
         function printDiv(divName) {
             var printContents = document.getElementById(divName).innerHTML;
             var originalContents = document.body.innerHTML;
@@ -30,7 +38,8 @@
 <body>
 	<div id="content">
 		<div id="toolbar">
-            <p id="toolbar-welcome">Welcome <b>@User.Identity.Name</b>!</p>
+        @if (Request.IsAuthenticated)
+        {<p id="toolbar-welcome">Welcome <b>@User.Identity.Name</b>!</p>}
 			@RenderPage("../Shared/_LogoutPartial.cshtml")
 		</div>
 		<div id="header">

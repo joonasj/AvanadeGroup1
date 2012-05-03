@@ -27,6 +27,7 @@ namespace IssueReportManagementTest.Controllers
         {
             //var issues = db.Issues.Include(i => i.Category).Include(i => i.Priority);
             string query;
+            string a_query;//for "closed" issues
             //ViewBag.Message = "Welcome to ASP.NET MVC!";
             if (System.Web.HttpContext.Current.User.IsInRole("Customer"))
             {
@@ -37,25 +38,31 @@ namespace IssueReportManagementTest.Controllers
                     switch (mode)
                     {
                         case "state":
-                            query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' ORDER BY State ASC";
+                            query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State<'4' ORDER BY State ASC";
+                            a_query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State='4' ORDER BY State ASC";
                             break;
                         case "cat":
-                            query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' ORDER BY CategoryID ASC";
+                            query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State<'4' ORDER BY CategoryID ASC";
+                            a_query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State='4' ORDER BY CategoryID ASC";
                             break;
                         case "priority":
-                            query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' ORDER BY PriorityID ASC";
+                            query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State<'4' ORDER BY PriorityID ASC";
+                            a_query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State='4' ORDER BY PriorityID ASC";
                             break;
                         case "title":
-                            query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' ORDER BY Title ASC";
+                            query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State<'4' ORDER BY Title ASC";
+                            a_query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State='4' ORDER BY Title ASC";
                             break;
                         default:
-                            query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' ORDER BY State ASC";
+                            query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State<'4' ORDER BY State ASC";
+                            a_query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State='4' ORDER BY State ASC";
                             break;
                     }
                 }
                 else
                 {
-                    query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' ORDER BY State ASC";
+                    query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' WHERE State<'4' ORDER BY State ASC";
+                    a_query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State='4' ORDER BY State ASC";
                 }
                 var listIssueviewModel = new IssueListViewModel
                 {
@@ -70,29 +77,36 @@ namespace IssueReportManagementTest.Controllers
                     switch (mode)
                     {
                         case "state":
-                            query = "SELECT * FROM Issue ORDER BY State ASC";
+                            query = "SELECT * FROM Issue WHERE State<'4' ORDER BY State ASC";
+                            a_query = "SELECT * FROM Issue WHERE State='4' ORDER BY State ASC";
                             break;
                         case "cat":
-                            query = "SELECT * FROM Issue ORDER BY CategoryID ASC";
+                            query = "SELECT * FROM Issue WHERE State<'4' ORDER BY CategoryID ASC";
+                            a_query = "SELECT * FROM Issue WHERE State='4' ORDER BY CategoryID ASC";
                             break;
                         case "priority":
-                            query = "SELECT * FROM Issue ORDER BY PriorityID ASC";
+                            query = "SELECT * FROM Issue WHERE State<'4' ORDER BY PriorityID ASC";
+                            a_query = "SELECT * FROM Issue WHERE State='4' ORDER BY PriorityID ASC";
                             break;
                         case "title":
-                            query = "SELECT * FROM Issue ORDER BY Title ASC";
+                            query = "SELECT * FROM Issue WHERE State<'4' ORDER BY Title ASC";
+                            a_query = "SELECT * FROM Issue WHERE State='4' ORDER BY Title ASC";
                             break;
                         default:
-                            query = "SELECT * FROM Issue ORDER BY State ASC";
+                            query = "SELECT * FROM Issue WHERE State<'4' ORDER BY State ASC";
+                            a_query = "SELECT * FROM Issue WHERE State='4' ORDER BY State ASC";
                             break;
                     }
                 }
                 else
                 {
-                    query = "SELECT * FROM Issue ORDER BY State ASC";
+                    query = "SELECT * FROM Issue WHERE State<'4' ORDER BY State ASC";
+                    a_query = "SELECT * FROM Issue WHERE State='4' ORDER BY State ASC";
                 }
                 var listIssueviewModel = new IssueListViewModel
                 {
-                    lissue = db.Issues.SqlQuery(query)
+                    lissue = db.Issues.SqlQuery(query),
+                    a_lissue = db.Issues.SqlQuery(a_query)
                 };
                 return View(listIssueviewModel);
 

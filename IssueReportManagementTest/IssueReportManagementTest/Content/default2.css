@@ -320,6 +320,11 @@
     width: 300px;
 }
 
+#content_container section table th 
+{
+    text-align: left;
+}
+
 #Description 
 {
     width: 500px;

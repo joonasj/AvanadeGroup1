@@ -3,7 +3,8 @@
 @{
     ViewBag.Title = "Report";
 }
-
+<img src="../../Content/media/graphics/printer_48.png" style="float: right; cursor:pointer;" onclick="printDiv('print-issue-report')" title="Print the reports"/>
+<div id="print-issue-report">
 @foreach (var item in Model.report_issues)
 {
     <div class="issue-report">
@@ -36,3 +37,4 @@
         <p>Number of activities: @item.cactivities.Count()</p>
     </div>
 }
+</div>

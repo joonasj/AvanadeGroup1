@@ -6,7 +6,8 @@
 
 
 
-<p class="sub-link-content">
+<p id="add-new-issue">
+    <img src="../../Content/media/graphics/paper_pencil_48.png" alt="a" onclick="window.location='Issue/Create'" />
     @Html.ActionLink("Add new issue", "Create")
 </p>
 @using (Html.BeginForm("GetReport", "Issue", FormMethod.Post)){
@@ -95,7 +96,7 @@
 }
 
 </table>
-<p id="open-archived-issues" title="Press to view archived messages">Archived issues</p>
+<p id="open-archived-issues" title="Press to view archived messages"><img src="../../Content/media/graphics/folder_add_48.png" alt="" />Archived issues</p>
 <div id="archived-issues">
  <table class="list-issues-table" cellspacing="0" >
     <tr class="list-issue-header">

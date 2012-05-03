@@ -360,6 +360,26 @@
 {
     cursor: pointer;
     color: #FF5309;
+    line-height: 48px;
+}
+
+#open-archived-issues img 
+{
+    float: left;
+    border: none;
+    margin-right: 3px;
+}
+
+#add-new-issue 
+{
+    line-height: 48px;
+}
+
+#add-new-issue img 
+{
+    float: left;
+    margin-right: 3px;
+    cursor: pointer;
 }
 
 #archived-issues
@@ -372,3 +392,4 @@
     border-bottom: 1px solid #ccc;
     margin-bottom: 10px;
 }
+

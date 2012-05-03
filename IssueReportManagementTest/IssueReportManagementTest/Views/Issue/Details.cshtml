@@ -106,6 +106,7 @@
 {
     using (Html.BeginForm("Update", "Issue"))
     {
+        <h2 style="line-height: 48px; font-size: 14px;"><img src="../../Content/media/graphics/app_48.png" alt="" style="float: left; border: none;" />Add new activity</h2>
         @Html.HiddenFor(model => model.cissue.IssueID)
         @Html.HiddenFor(model => model.cissue.State)
         <fieldset>

@@ -81,8 +81,11 @@
     <Compile Include="Models\Priority.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\PriorityViewModel.cs" />
-    <Compile Include="Views\ViewModel\IssueListViewModel.cs" />
-    <Compile Include="Views\ViewModel\IssueViewModel.cs" />
+    <None Include="ViewModel\IssueListViewModel.cs~" />
+    <None Include="ViewModel\IssueViewModel.cs~1" />
+    <Compile Include="ViewModel\IssueListViewModel.cs" />
+    <Compile Include="ViewModel\IssueViewModel.cs" />
+    <Compile Include="ViewModel\ReportIssueViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\default.css" />
@@ -210,6 +213,8 @@
     <Content Include="Views\Error\Http404.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Issue\GetReport.cshtml" />
+    <None Include="ViewModel\IssueViewModel.cs~" />
     <None Include="Views\Shared\_LogOnPartialForm.cshtml~" />
     <Content Include="Views\Shared\_LogOutPartial.cshtml" />
     <Content Include="Views\Shared\_QuickSearchPartial.cshtml" />

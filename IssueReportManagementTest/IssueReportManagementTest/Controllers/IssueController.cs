@@ -444,6 +444,30 @@ namespace IssueReportManagementTest.Controllers
             return View(viewModel);
         }
 
+
+        //HTTPOST GetReport
+        [HttpPost]
+        public ActionResult GetReport(int[] reportID)
+        {
+            List<IssueViewModel> issueViewModels = new List<IssueViewModel>();
+            int al = reportID.Length;
+            for(int i = 0; i<al; i++){
+                var view = new IssueViewModel {
+                    cissue = db.Issues.Find(reportID[i]),
+                    cactivities = db.Activities.SqlQuery("SELECT * FROM Activity WHERE IssueID='"+reportID[i]+"'")
+                };
+                issueViewModels.Add(view);
+            }
+            
+            var viewModel = new ReportIssueViewModel
+            {
+                report_issues = issueViewModels
+            };
+           
+
+            return View(viewModel);
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

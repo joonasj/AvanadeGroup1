@@ -249,6 +249,8 @@
     color: #000;
 }
 
+
+
 .table-row-even 
 {
     background: #ccc;
@@ -268,6 +270,7 @@
 .list-issue-header 
 {
     cursor: default;
+    background: #27bae9 url("media/graphics/issue-table-header_bg.jpg") repeat-x;
 }
 
 .display-label 
@@ -362,4 +365,10 @@
 #archived-issues
 {
    display: none;
+}
+
+.issue-report 
+{
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
 }

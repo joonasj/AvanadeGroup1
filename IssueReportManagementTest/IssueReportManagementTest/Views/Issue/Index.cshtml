@@ -9,8 +9,10 @@
 <p class="sub-link-content">
     @Html.ActionLink("Add new issue", "Create")
 </p>
+@using (Html.BeginForm("GetReport", "Issue", FormMethod.Post)){
  <table class="list-issues-table" cellspacing="0">
     <tr class="list-issue-header">
+        
         <th>
             ID
         </th>
@@ -34,18 +36,19 @@
             Modiefied
         </th>
         <th>Username</th>
+        <th>Select</th>
     </tr>
 @{ var odd = true; }
 @foreach (var item in Model.lissue)
 {
-    <tr class="@(odd ? "table-row-odd" : "table-row-even")" onclick="window.location='Issue/Details/@(item.IssueID)'">
-        <td>
+    <tr class="@(odd ? "table-row-odd" : "table-row-even")">
+        <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @Html.DisplayFor(model => item.IssueID)
         </td>
         <td>
             @Html.ActionLink(item.Title, "Details/" + item.IssueID, "Issue")
         </td>
-        <td>
+        <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @{
                 switch (item.State)
                 {
@@ -70,22 +73,23 @@
                 }
             }
         </td>
-         <td>
+         <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @Html.DisplayFor(model => item.Priority.Name)
         </td>
         <td>
             @Html.DisplayFor(model => item.Category.Name)
         </td>
        
-        <td>
+        <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @item.Added.ToString("dd.MM.yy")
         </td>
-        <td>
+        <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @item.Modiefied.ToString("dd.MM.yy")
         </td>
-        <td>
+        <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @Html.DisplayFor(model => item.Writer)
         </td>
+        <td><input type="checkbox" value="@item.IssueID" name="reportID" /></td>
     </tr>
                 odd = !odd;
 }
@@ -118,17 +122,18 @@
             Modiefied
         </th>
         <th>Username</th>
+        <th>Select</th>
     </tr>
 @foreach (var item in Model.a_lissue)
 {
-    <tr class="@(odd ? "table-row-odd" : "table-row-even")" onclick="window.location='Issue/Details/@(item.IssueID)'">
-        <td>
+    <tr class="@(odd ? "table-row-odd" : "table-row-even")">
+        <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @Html.DisplayFor(model => item.IssueID)
         </td>
         <td>
             @Html.ActionLink(item.Title, "Details/" + item.IssueID, "Issue")
         </td>
-        <td>
+        <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @{
                 switch (item.State)
                 {
@@ -153,22 +158,23 @@
                 }
             }
         </td>
-         <td>
+         <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @Html.DisplayFor(model => item.Priority.Name)
         </td>
         <td>
             @Html.DisplayFor(model => item.Category.Name)
         </td>
        
-        <td>
+        <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @item.Added.ToString("dd.MM.yy")
         </td>
         <td>
             @item.Modiefied.ToString("dd.MM.yy")
         </td>
-        <td>
+        <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @Html.DisplayFor(model => item.Writer)
         </td>
+        <td><input type="checkbox" value="@item.IssueID" name="reportID" /></td>
     </tr>
                 odd = !odd;
 }
@@ -185,3 +191,5 @@
         }
     });
 </script>
+    <p><input type="submit" value="Get reports" /></p>
+}

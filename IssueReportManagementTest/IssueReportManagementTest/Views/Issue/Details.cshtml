@@ -85,7 +85,7 @@
         @foreach (var item in Model.cactivities)
         {
             <div class="display-activity">
-                <p>@item.Context</p>
+                <p>@Html.Raw(item.Context)</p>
                 <p><i>@item.Employee @item.Added.ToString("dd.MM.yy")</i></p>
             </div>
         }

@@ -273,9 +273,54 @@ namespace IssueReportManagementTest.Controllers
             int n_state = Convert.ToInt16(c["new-state"]);
             //Activity content
             string ac_content = c["new_activity"];
+            //Changes to status
+            string status_str = "";
+            string parsed_content = "";
+            if (o_state != n_state)
+            {
+                switch (o_state)
+                {
+                    case 0:
+                        status_str = "Changed state from Not started to ";
+                        break;
+                    case 1:
+                        status_str = "Changed state from Started to ";
+                        break;
+                    case 2:
+                        status_str = "Changed state from Waiting to ";
+                        break;
+                    case 3:
+                        status_str = "Changed state from Resolved to ";
+                        break;
+                    case 4:
+                        status_str = "Changed state from Closed to ";
+                        break;
+                    default:
+                        status_str = "";
+                        break;
+                }
+                switch (n_state)
+                {
+                    case 1:
+                        status_str = status_str + "Started.<br />\n";
+                        break;
+                    case 2:
+                        status_str = status_str + "Waiting.<br />\n";
+                        break;
+                    case 3:
+                        status_str = status_str + "Resolved.<br />\n";
+                        break;
+                    case 4:
+                        status_str = status_str + "Closed.<br />\n";
+                        break;
+                    default:
+                        status_str = "";
+                        break;
+                }
+
+            }
             //Server side validation
-            /*if (id > 0 && o_state > 0 && n_state > 0)
-            {*/
+         
                 //Current employee/adminitrator
                 string c_employee = System.Web.HttpContext.Current.User.Identity.Name;
                 //Day when activity has been added
@@ -289,7 +334,7 @@ namespace IssueReportManagementTest.Controllers
                             ac_content = "Employee " + c_employee + " has started to work with current issue.";
                             break;
                         case 2:
-                            ac_content = "Issue canno't be solved without at the moment. More information from " + c_employee + ".";
+                            ac_content = "Issue canno't be solved at the moment. More information from " + c_employee + ".";
                             break;
                         case 3:
                             ac_content = "Issue has been resolved by " + c_employee + ".";
@@ -304,6 +349,10 @@ namespace IssueReportManagementTest.Controllers
                             break;
                     }
                 }
+                
+                //parse the message
+                parsed_content = status_str + ac_content;
+                ac_content = parsed_content;
 
                 if (n_state == 4)
                 {
@@ -337,31 +386,13 @@ namespace IssueReportManagementTest.Controllers
 
                 var issue_sql = @"UPDATE [Issue] SET State = {0}, Modiefied = {1} WHERE IssueID = {2}";
                 var activity_sql = @"INSERT INTO [Activity] (IssueID, Added, Employee, Context) VALUES ({0}, {1}, {2}, {3})";
-                //string issue_query = "UPDATE Issue SET State='" + n_state + "', Modiefied='" + mod + "'";
-                //string activity_query = "INSERT INTO Activity (IssueID, Added, Employee, Context) VALUES ('" + id + "', '" + mod + "', '" + c_employee + "', '" + ac_content + "')";
-                //SqlCommand icmd = new SqlCommand(issue_query);
+               
                 db.Database.ExecuteSqlCommand(issue_sql, n_state, mod, id);
                 db.Database.ExecuteSqlCommand(activity_sql, id, mod, c_employee, ac_content);
-                //db.Database.ExecuteSqlCommand(issue_query);
-                //db.Database.ExecuteSqlCommand(activity_query);
-                //db.Database.ExecuteSqlCommand(icmd);
-                //IEnumerable<IssueContext> ico = db.
-                
-                //icmd.Prepare();
-                
-                //icmd.BeginExecuteNonQuery();
-                //icmd.Transaction.Commit();
-                //db.SaveChanges();
-                //SqlCommand acmd = new SqlCommand(activity_query);
-                //return View(activity_query);
+               
                 return RedirectToAction("Index");
 
-            //}
-            /*else
-            {
-                return RedirectToAction("Error/1", "Home");
-            }*/
-
+          
 
             
         }

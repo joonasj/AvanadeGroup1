@@ -81,17 +81,25 @@
     <Compile Include="Models\Priority.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\PriorityViewModel.cs" />
-    <Compile Include="Views\ViewModel\IssueListViewModel.cs" />
-    <Compile Include="Views\ViewModel\IssueViewModel.cs" />
+    <None Include="ViewModel\IssueListViewModel.cs~" />
+    <None Include="ViewModel\IssueViewModel.cs~1" />
+    <Compile Include="ViewModel\IssueListViewModel.cs" />
+    <Compile Include="ViewModel\IssueViewModel.cs" />
+    <Compile Include="ViewModel\ReportIssueViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\default.css" />
     <Content Include="Content\default2.css" />
     <Content Include="Content\main_menu.css" />
     <Content Include="Content\main_menu2.css" />
+    <Content Include="Content\media\graphics\app_48.png" />
     <Content Include="Content\media\graphics\body_bg.jpg" />
+    <Content Include="Content\media\graphics\folder_add_48.png" />
     <Content Include="Content\media\graphics\logo.jpg" />
     <Content Include="Content\media\graphics\logout.png" />
+    <Content Include="Content\media\graphics\paper_pencil_48.png" />
+    <Content Include="Content\media\graphics\paper_content_chart_48.png" />
+    <Content Include="Content\media\graphics\printer_48.png" />
     <Content Include="Content\media\graphics\pro16_0.gif" />
     <Content Include="Content\media\graphics\pro16_0a.gif" />
     <Content Include="Content\media\graphics\pro16_2.gif" />
@@ -99,6 +107,7 @@
     <Content Include="Content\media\graphics\pro16_back.gif" />
     <Content Include="Content\media\graphics\search_icon.png" />
     <Content Include="Content\media\graphics\toolbar_bg.jpg" />
+    <Content Include="Content\Scripts\avanade_scripts.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -209,6 +218,8 @@
     <Content Include="Views\Error\Http404.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Issue\GetReport.cshtml" />
+    <None Include="ViewModel\IssueViewModel.cs~" />
     <None Include="Views\Shared\_LogOnPartialForm.cshtml~" />
     <Content Include="Views\Shared\_LogOutPartial.cshtml" />
     <Content Include="Views\Shared\_QuickSearchPartial.cshtml" />

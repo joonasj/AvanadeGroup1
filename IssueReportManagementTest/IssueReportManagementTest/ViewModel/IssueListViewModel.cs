@@ -9,5 +9,6 @@ namespace IssueReportManagementTest.ViewModel
     public class IssueListViewModel
     {
         public IEnumerable<Issue> lissue { get; set; }
+        public IEnumerable<Issue> a_lissue { get; set; }
     }
 }

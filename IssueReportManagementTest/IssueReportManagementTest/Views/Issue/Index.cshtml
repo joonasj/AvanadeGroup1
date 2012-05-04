@@ -3,13 +3,17 @@
 @{
     ViewBag.Title = "Index";
 }
-<p>Welcome <b>@User.Identity.Name</b>!</p>
 
-<p class="sub-link-content">
+
+
+<p id="add-new-issue">
+    <img src="../../Content/media/graphics/paper_pencil_48.png" alt="a" onclick="window.location='Issue/Create'" />
     @Html.ActionLink("Add new issue", "Create")
 </p>
+@using (Html.BeginForm("GetReport", "Issue", FormMethod.Post)){
  <table class="list-issues-table" cellspacing="0">
     <tr class="list-issue-header">
+        
         <th>
             ID
         </th>
@@ -33,18 +37,19 @@
             Modiefied
         </th>
         <th>Username</th>
+        <th>Select</th>
     </tr>
 @{ var odd = true; }
 @foreach (var item in Model.lissue)
 {
-    <tr class="@(odd ? "table-row-odd" : "table-row-even")" onclick="window.location='Issue/Details/@(item.IssueID)'">
-        <td>
+    <tr class="@(odd ? "table-row-odd" : "table-row-even")">
+        <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @Html.DisplayFor(model => item.IssueID)
         </td>
-        <td>
+        <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @Html.ActionLink(item.Title, "Details/" + item.IssueID, "Issue")
         </td>
-        <td>
+        <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @{
                 switch (item.State)
                 {
@@ -69,24 +74,124 @@
                 }
             }
         </td>
-         <td>
+         <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @Html.DisplayFor(model => item.Priority.Name)
         </td>
         <td>
             @Html.DisplayFor(model => item.Category.Name)
         </td>
        
-        <td>
+        <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @item.Added.ToString("dd.MM.yy")
         </td>
-        <td>
+        <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @item.Modiefied.ToString("dd.MM.yy")
         </td>
-        <td>
+        <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @Html.DisplayFor(model => item.Writer)
         </td>
+        <td><input type="checkbox" value="@item.IssueID" name="reportID" /></td>
     </tr>
                 odd = !odd;
 }
 
 </table>
+<p id="open-archived-issues" title="Press to view archived messages" onload="hideArchive()"><img src="../../Content/media/graphics/folder_add_48.png" alt="" />Archived issues</p>
+<div id="archived-issues">
+ <table class="list-issues-table" cellspacing="0" >
+    <tr class="list-issue-header">
+        <th>
+            ID
+        </th>
+        <th>
+            Title
+        </th>
+        <th>
+            State
+        </th>
+        <th>
+            Priority
+        </th>
+        <th>
+            Category
+        </th>
+        
+        <th>
+            Added
+        </th>
+        <th>
+            Modiefied
+        </th>
+        <th>Username</th>
+        <th>Select</th>
+    </tr>
+@foreach (var item in Model.a_lissue)
+{
+    <tr class="@(odd ? "table-row-odd" : "table-row-even")">
+        <td onclick="window.location='Issue/Details/@(item.IssueID)'">
+            @Html.DisplayFor(model => item.IssueID)
+        </td>
+        <td>
+            @Html.ActionLink(item.Title, "Details/" + item.IssueID, "Issue")
+        </td>
+        <td onclick="window.location='Issue/Details/@(item.IssueID)'">
+            @{
+                switch (item.State)
+                {
+                    case 0:
+                        <text>Not started</text>
+                    break;
+                    case 1:
+                        <text>Started</text>
+                    break;
+                    case 2:
+                        <text>Waiting</text>
+                    break;
+                    case 3:
+                        <text>Resolved</text>
+                    break;
+                    case 4:
+                        <text>Closed</text>
+                    break;
+                    default:
+                        <text>Error</text>
+                    break;
+                }
+            }
+        </td>
+         <td onclick="window.location='Issue/Details/@(item.IssueID)'">
+            @Html.DisplayFor(model => item.Priority.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.Category.Name)
+        </td>
+       
+        <td onclick="window.location='Issue/Details/@(item.IssueID)'">
+            @item.Added.ToString("dd.MM.yy")
+        </td>
+        <td>
+            @item.Modiefied.ToString("dd.MM.yy")
+        </td>
+        <td onclick="window.location='Issue/Details/@(item.IssueID)'">
+            @Html.DisplayFor(model => item.Writer)
+        </td>
+        <td><input type="checkbox" value="@item.IssueID" name="reportID" /></td>
+    </tr>
+                odd = !odd;
+}
+
+</table>
+</div>
+<script type="text/javascript">
+    $("#archived-issues").addClass("hide-archived");
+    $("#open-archived-issues").live('click', function () {
+        //alert("Daapa daapa");
+        if ($("#archived-issues").is(":hidden")) {
+            $("#archived-issues").slideDown("fast");
+        } else {
+            $("#archived-issues").hide();
+        }
+    });
+</script>
+    <p><input type="image" src="../../Content/media/graphics/paper_content_chart_48.png" title="Get reports" style="float: left;" /><input type="submit" value="Get reports" style="margin-top: 10px;" /></p>
+}

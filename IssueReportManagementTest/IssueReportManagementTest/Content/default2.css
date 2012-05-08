@@ -355,6 +355,9 @@
 .time-content-issue-detail 
 {
     margin-top: 10px;
+   padding-bottom: 10px;
+   display: block;
+   margin-bottom: 20px;
 }
 
 #content_container section #Title, #content_container section #CategoryID, #content_container section #PriorityID
@@ -365,6 +368,11 @@
 #content_container section table th 
 {
     text-align: left;
+}
+
+#content_container section img 
+{
+    border: none;
 }
 
 #Description 

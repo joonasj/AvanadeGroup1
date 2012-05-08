@@ -18,7 +18,7 @@ namespace IssueReportManagementTest.Controllers
         [HttpPost]
         public ActionResult Download(int[] reportID)
         {
-            
+            csvdata = "";
             List<IssueViewModel> issueViewModels = new List<IssueViewModel>();
             int al = reportID.Length;
             for (int i = 0; i < al; i++)
@@ -29,12 +29,12 @@ namespace IssueReportManagementTest.Controllers
                     cactivities = db.Activities.SqlQuery("SELECT * FROM Activity WHERE IssueID='" + reportID[i] + "'")
                 };
                 issueViewModels.Add(view);
-                foreach (IssueViewModel item in issueViewModels)
-                {
-                    csvdata = csvdata + item.cissue.Title + "," + item.cissue.Added + "," + item.cissue.Modiefied + "," + item.cissue.State + "," + item.cactivities.Count() + ",";
-                }
+                
             }
-
+            foreach (IssueViewModel item in issueViewModels)
+            {
+                csvdata = csvdata + item.cissue.Title + "," + item.cissue.Added + "," + item.cissue.Modiefied + "," + item.cissue.State + "," + item.cactivities.Count() + ",";
+            }
             //string csvdata;
 
             /*var viewModel = new ReportIssueViewModel

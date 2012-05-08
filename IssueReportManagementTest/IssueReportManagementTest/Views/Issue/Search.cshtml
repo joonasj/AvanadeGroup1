@@ -3,11 +3,7 @@
 @{
     ViewBag.Title = "Index";
 }
-<p>Welcome <b>@User.Identity.Name</b>!</p>
-
-<p class="sub-link-content">
-    @Html.ActionLink("Add new issue", "Create")
-</p>
+<h2>Search result:</h2>
  <table class="list-issues-table" cellspacing="0">
     <tr class="list-issue-header">
         <th>
@@ -90,3 +86,4 @@
 }
 
 </table>
+<p>@Html.ActionLink("Back to Issues", "Index", "Issue")</p>

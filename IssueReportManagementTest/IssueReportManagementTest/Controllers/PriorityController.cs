@@ -9,13 +9,14 @@ using IssueReportManagementTest.Models;
 
 namespace IssueReportManagementTest.Controllers
 { 
+    [Authorize]
     public class PriorityController : Controller
     {
         private IssueContext db = new IssueContext();
 
         //
         // GET: /Priority/
-
+        [Authorize(Roles = "Administrator")]
         public ViewResult Index()
         {
             return View(db.Priorities.ToList());
@@ -23,7 +24,7 @@ namespace IssueReportManagementTest.Controllers
 
         //
         // GET: /Priority/Details/5
-
+        [Authorize(Roles = "Administrator")]
         public ViewResult Details(int id)
         {
             Priority priority = db.Priorities.Find(id);
@@ -32,7 +33,7 @@ namespace IssueReportManagementTest.Controllers
 
         //
         // GET: /Priority/Create
-
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             return View();
@@ -56,7 +57,7 @@ namespace IssueReportManagementTest.Controllers
         
         //
         // GET: /Priority/Edit/5
- 
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int id)
         {
             Priority priority = db.Priorities.Find(id);
@@ -80,7 +81,7 @@ namespace IssueReportManagementTest.Controllers
 
         //
         // GET: /Priority/Delete/5
- 
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int id)
         {
             Priority priority = db.Priorities.Find(id);

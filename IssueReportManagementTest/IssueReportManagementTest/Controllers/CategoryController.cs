@@ -9,13 +9,14 @@ using IssueReportManagementTest.Models;
 
 namespace IssueReportManagementTest.Controllers
 { 
+    [Authorize]
     public class CategoryController : Controller
     {
         private IssueContext db = new IssueContext();
 
         //
         // GET: /Category/
-
+        [Authorize(Roles = "Administrator")]
         public ViewResult Index()
         {
             return View(db.Categories.ToList());
@@ -23,7 +24,7 @@ namespace IssueReportManagementTest.Controllers
 
         //
         // GET: /Category/Details/5
-
+        [Authorize(Roles = "Administrator")]
         public ViewResult Details(int id)
         {
             Category category = db.Categories.Find(id);
@@ -32,7 +33,7 @@ namespace IssueReportManagementTest.Controllers
 
         //
         // GET: /Category/Create
-
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             return View();
@@ -56,7 +57,7 @@ namespace IssueReportManagementTest.Controllers
         
         //
         // GET: /Category/Edit/5
- 
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int id)
         {
             Category category = db.Categories.Find(id);
@@ -80,7 +81,7 @@ namespace IssueReportManagementTest.Controllers
 
         //
         // GET: /Category/Delete/5
- 
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int id)
         {
             Category category = db.Categories.Find(id);

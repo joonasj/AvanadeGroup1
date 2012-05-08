@@ -15,6 +15,7 @@ using System.IO;
 
 namespace IssueReportManagementTest.Controllers
 { 
+    [Authorize]
     public class IssueController : Controller
     {
         private IssueContext db = new IssueContext();
@@ -22,7 +23,7 @@ namespace IssueReportManagementTest.Controllers
 
         //
         // GET: /Issue/
-
+        [Authorize(Roles = "Administrator, Employee, Customer")]
         public ViewResult Index(string mode)
         {
 
@@ -120,7 +121,7 @@ namespace IssueReportManagementTest.Controllers
 
         //
         // GET: /Issue/Details/5
-
+        [Authorize(Roles = "Administrator, Employee, Customer")]
         public ViewResult Details(int id)
         {
             Issue issue = db.Issues.Find(id);
@@ -159,7 +160,7 @@ namespace IssueReportManagementTest.Controllers
 
         //
         // GET: /Issue/Create
-
+        [Authorize(Roles = "Administrator, Employee, Customer")]
         public ActionResult Create()
         {
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name");
@@ -239,7 +240,7 @@ namespace IssueReportManagementTest.Controllers
         
         //
         // GET: /Issue/Edit/5
- 
+        [Authorize(Roles = "Administrator, Employee")]
         public ActionResult Edit(int id)
         {
             Issue issue = db.Issues.Find(id);
@@ -402,7 +403,7 @@ namespace IssueReportManagementTest.Controllers
 
         //
         // GET: /Issue/Delete/5
- 
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int id)
         {
             Issue issue = db.Issues.Find(id);

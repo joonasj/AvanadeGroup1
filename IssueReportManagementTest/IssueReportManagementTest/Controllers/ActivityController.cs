@@ -8,14 +8,15 @@ using System.Web.Mvc;
 using IssueReportManagementTest.Models;
 
 namespace IssueReportManagementTest.Controllers
-{ 
+{
+    [Authorize]
     public class ActivityController : Controller
     {
         private IssueContext db = new IssueContext();
 
         //
         // GET: /Activity/
-
+        [Authorize(Roles = "Administrator")]
         public ViewResult Index()
         {
             var activities = db.Activities.Include(a => a.Issue);
@@ -24,7 +25,7 @@ namespace IssueReportManagementTest.Controllers
 
         //
         // GET: /Activity/Details/5
-
+        [Authorize(Roles = "Administrator")]
         public ViewResult Details(int id)
         {
             Activity activity = db.Activities.Find(id);
@@ -33,7 +34,7 @@ namespace IssueReportManagementTest.Controllers
 
         //
         // GET: /Activity/Create
-
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             ViewBag.IssueID = new SelectList(db.Issues, "IssueID", "Title");
@@ -59,7 +60,7 @@ namespace IssueReportManagementTest.Controllers
         
         //
         // GET: /Activity/Edit/5
- 
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int id)
         {
             Activity activity = db.Activities.Find(id);
@@ -85,7 +86,7 @@ namespace IssueReportManagementTest.Controllers
 
         //
         // GET: /Activity/Delete/5
- 
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int id)
         {
             Activity activity = db.Activities.Find(id);

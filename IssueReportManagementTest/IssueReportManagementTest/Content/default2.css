@@ -152,6 +152,13 @@
     border: none;
 }
 
+#content_container section fieldset legend 
+{
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
 .add-shadow-box-fieldset 
 {
     background: transparent url("media/graphics/section_bg.png") no-repeat bottom;

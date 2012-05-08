@@ -144,6 +144,17 @@
 #content_container section 
 {
     width: 756px;
+    
+}
+
+#content_container section fieldset 
+{
+    border: none;
+}
+
+.add-shadow-box-fieldset 
+{
+    background: transparent url("media/graphics/section_bg.png") no-repeat bottom;
 }
 
 .er {

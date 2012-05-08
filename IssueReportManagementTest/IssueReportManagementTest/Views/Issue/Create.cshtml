@@ -12,7 +12,7 @@
 @using (Html.BeginForm("Create", "Issue", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.ValidationSummary(true)
-    <fieldset>
+    <fieldset class="add-shadow-box-fieldset">
         <legend>Issue</legend>
 
         <div class="editor-label">

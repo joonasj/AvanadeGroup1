@@ -4,10 +4,15 @@
     ViewBag.Title = "Report";
 }
 <img src="../../Content/media/graphics/printer_48.png" style="float: right; cursor:pointer;" class="hide-printer" onload="showPrinter()" onclick="printDiv('print-issue-report')" title="Print the reports"/>
+@using (Html.BeginForm("Download", "CSV"))
+{
 <div id="print-issue-report">
+
+
 @foreach (var item in Model.report_issues)
 {
     <div class="issue-report">
+        <input type="hidden" value="@item.cissue.IssueID" name="reportID" />
         <p>Title: @item.cissue.Title</p>
         <p>Added: @item.cissue.Added.ToString("dd.MM.yy")</p>
         <p>Last modification: @item.cissue.Modiefied.ToString("dd.MM.yy")</p>
@@ -37,4 +42,8 @@
         <p>Number of activities: @item.cactivities.Count()</p>
     </div>
 }
+
 </div>
+<div id="report-download-cvs"><input type="submit" value="Download cvs" /></div>
+}
+

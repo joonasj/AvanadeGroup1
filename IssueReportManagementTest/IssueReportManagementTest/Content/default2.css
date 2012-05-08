@@ -291,6 +291,20 @@
     background: #27bae9 url("media/graphics/issue-table-header_bg.jpg") repeat-x;
 }
 
+.list-issue-header a 
+{
+    color: #000;
+    text-decoration: none;
+}
+
+.list-issue-header img 
+{
+    border: none;
+    float: left;
+    height: 15px;
+    margin-top: 1px;
+}
+
 .display-label 
 {
     font-weight: bold;
@@ -359,12 +373,12 @@
     height: 225px;
 }
 
-#content_container section a:link, #content_container section a:visited 
+#content_container section p a:link, #content_container section p a:visited 
 {
     color: #FF5309;
 }
 
-#content_container section a:hover 
+#content_container section p a:hover 
 {
     color: #000;
 }

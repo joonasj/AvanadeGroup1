@@ -12,6 +12,7 @@ using System.Web.Security;
 using System.Net.Mail;
 using System.Net;
 using System.IO;
+using System.Text;
 
 namespace IssueReportManagementTest.Controllers
 { 
@@ -20,6 +21,7 @@ namespace IssueReportManagementTest.Controllers
     {
         private IssueContext db = new IssueContext();
         private SmtpClient smtps = new SmtpClient("smtp.gmail.com", 587);
+        private string csvdata;
 
         //
         // GET: /Issue/
@@ -49,8 +51,8 @@ namespace IssueReportManagementTest.Controllers
                             a_query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State='4' ORDER BY CategoryID ASC";
                             break;
                         case "priority":
-                            query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State<'4' ORDER BY PriorityID ASC";
-                            a_query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State='4' ORDER BY PriorityID ASC";
+                            query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State<'4' ORDER BY PriorityID DESC";
+                            a_query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State='4' ORDER BY PriorityID DESC";
                             break;
                         case "title":
                             query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State<'4' ORDER BY Title ASC";
@@ -89,8 +91,8 @@ namespace IssueReportManagementTest.Controllers
                             a_query = "SELECT * FROM Issue WHERE State='4' ORDER BY CategoryID ASC";
                             break;
                         case "priority":
-                            query = "SELECT * FROM Issue WHERE State<'4' ORDER BY PriorityID ASC";
-                            a_query = "SELECT * FROM Issue WHERE State='4' ORDER BY PriorityID ASC";
+                            query = "SELECT * FROM Issue WHERE State<'4' ORDER BY PriorityID DESC";
+                            a_query = "SELECT * FROM Issue WHERE State='4' ORDER BY PriorityID DESC";
                             break;
                         case "title":
                             query = "SELECT * FROM Issue WHERE State<'4' ORDER BY Title ASC";

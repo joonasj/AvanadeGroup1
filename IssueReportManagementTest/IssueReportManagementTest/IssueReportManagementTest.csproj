@@ -65,6 +65,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CSVController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IssueController.cs" />
@@ -90,6 +91,16 @@
   <ItemGroup>
     <Content Include="Content\default.css" />
     <Content Include="Content\default2.css" />
+    <Content Include="Content\file_extension_icons\calc.png" />
+    <Content Include="Content\file_extension_icons\excel.png" />
+    <Content Include="Content\file_extension_icons\image.png" />
+    <Content Include="Content\file_extension_icons\impress.png" />
+    <Content Include="Content\file_extension_icons\pdf.png" />
+    <Content Include="Content\file_extension_icons\powerpoint.png" />
+    <Content Include="Content\file_extension_icons\unknown.png" />
+    <Content Include="Content\file_extension_icons\word.png" />
+    <Content Include="Content\file_extension_icons\writer.png" />
+    <Content Include="Content\file_extension_icons\zip.png" />
     <Content Include="Content\main_menu.css" />
     <Content Include="Content\main_menu2.css" />
     <Content Include="Content\media\graphics\app_48.png" />
@@ -106,7 +117,9 @@
     <Content Include="Content\media\graphics\pro16_2a.gif" />
     <Content Include="Content\media\graphics\pro16_back.gif" />
     <Content Include="Content\media\graphics\search_icon.png" />
+    <Content Include="Content\media\graphics\section_bg.png" />
     <Content Include="Content\media\graphics\toolbar_bg.jpg" />
+    <Content Include="Content\media\graphics\triangle.png" />
     <Content Include="Content\Scripts\avanade_scripts.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -220,6 +233,7 @@
     </Content>
     <Content Include="Views\Issue\GetReport.cshtml" />
     <None Include="ViewModel\IssueViewModel.cs~" />
+    <Content Include="Views\CSV\Download.cshtml" />
     <None Include="Views\Shared\_LogOnPartialForm.cshtml~" />
     <Content Include="Views\Shared\_LogOutPartial.cshtml" />
     <Content Include="Views\Shared\_QuickSearchPartial.cshtml" />

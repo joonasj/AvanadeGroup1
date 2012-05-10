@@ -109,7 +109,18 @@
 {
     using (Html.BeginForm("Update", "Issue"))
     {
+        if (@HttpContext.Current.User.IsInRole("Administrator"))
+        {
+            <select name="assign">
+            <option value="">None</option>
+            @foreach (var emp in Roles.GetUsersInRole("Employee"))
+            {
+                <option value="@emp">@emp</option>
+            }
+            </select>
+        }
         <h2 style="line-height: 48px; font-size: 14px;"><img src="../../Content/media/graphics/app_48.png" alt="" style="float: left; border: none;" />Add new activity</h2>
+        @Html.HiddenFor(model => model.cissue.Employee)
         @Html.HiddenFor(model => model.cissue.IssueID)
         @Html.HiddenFor(model => model.cissue.State)
         <fieldset>

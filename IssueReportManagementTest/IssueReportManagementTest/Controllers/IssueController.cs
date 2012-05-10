@@ -44,6 +44,10 @@ namespace IssueReportManagementTest.Controllers
                 {
                     switch (mode)
                     {
+                        case "id":
+                            query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State<'4' ORDER BY IssueID DESC";
+                            a_query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State='4' ORDER BY IssueID DESC";
+                            break;
                         case "state":
                             query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State<'4' ORDER BY State ASC";
                             a_query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State='4' ORDER BY State ASC";
@@ -84,6 +88,11 @@ namespace IssueReportManagementTest.Controllers
                 {
                     switch (mode)
                     {
+                        case "id":
+                            query = "SELECT * FROM Issue WHERE State<'4' ORDER BY IssueID DESC";
+                            a_query = "SELECT * FROM Issue WHERE State='4' ORDER BY IssueID DESC";
+                            e_query = "SELECT * FROM Issue WHERE State<'4' AND Employee='" + cuser + "' ORDER BY IssueID DESC";
+                            break;
                         case "state":
                             query = "SELECT * FROM Issue WHERE State<'4' ORDER BY State ASC";
                             a_query = "SELECT * FROM Issue WHERE State='4' ORDER BY State ASC";
@@ -102,7 +111,7 @@ namespace IssueReportManagementTest.Controllers
                         case "title":
                             query = "SELECT * FROM Issue WHERE State<'4' ORDER BY Title ASC";
                             a_query = "SELECT * FROM Issue WHERE State='4' ORDER BY Title ASC";
-                            e_query = "SELECT * FROM Issue WHERE State<'4' AND Employee='" + cuser + "' ORDER BY TitleID ASC";
+                            e_query = "SELECT * FROM Issue WHERE State<'4' AND Employee='" + cuser + "' ORDER BY Title ASC";
                             break;
                         default:
                             query = "SELECT * FROM Issue WHERE State<'4' ORDER BY State ASC";
@@ -283,10 +292,6 @@ namespace IssueReportManagementTest.Controllers
             //Employees
             string old_employee = c["cissue.Employee"];
             string employee = c["assign"];
-            if (employee == null || employee == "")
-            {
-                employee = old_employee;
-            }
             //Issue ID
             int id = Convert.ToInt16(c["cissue.IssueID"]);
             //Old state
@@ -301,24 +306,28 @@ namespace IssueReportManagementTest.Controllers
             {
                 if (old_employee == "" || old_employee == null)
                 {
-                    assignment_str = "Assigned to " + employee + "<br />\n";
-                }
-                else
-                {
-                    if (employee == null || employee == "")
+                    if (employee == "" || employee == null)
                     {
-                        assignment_str = "Assigned to no-one";
+                        assignment_str = "This issue isn't assigned to anyone.<br />\n";
                     }
                     else
                     {
-                        assignment_str = "Assignment from " + old_employee + " to " + employee + ".<br />\n";
+                        assignment_str = "This issue has been assigned to " + employee + ".<br />\n";
+                    }
+                }
+                else
+                {
+                    if (employee == "" || employee == null)
+                    {
+                        assignment_str = "This issue isn't assigned to anyone.<br />\n";
+                    }
+                    else
+                    {
+                        assignment_str = "This issue has been assigned to " + employee + " from " + old_employee + ".<br />\n";
                     }
                 }
             }
-            else
-            {
-                employee = old_employee;
-            }
+            
             
             //Changes to status
             string status_str = "";

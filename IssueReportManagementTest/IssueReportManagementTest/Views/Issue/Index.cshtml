@@ -18,7 +18,7 @@
     <tr class="list-issue-header">
         
         <th>
-            ID
+            <a href="?mode=id"><img src="../../Content/media/graphics/triangle.png" alt="ID" />ID</a>
         </th>
         <th>
             <a href="?mode=title"><img src="../../Content/media/graphics/triangle.png" alt="ID" /> Title</a>
@@ -40,7 +40,6 @@
             Modiefied
         </th>
         <th>Username</th>
-        <th>Select</th>
     </tr>
     @{ var odd = true; }
     @if (Model.e_lissue.Count() != 0)
@@ -52,31 +51,36 @@
                 @Html.DisplayFor(model => item.IssueID)
             </td>
             <td onclick="window.location='Issue/Details/@(item.IssueID)'">
-                @Html.ActionLink(item.Title, "Details/" + item.IssueID, "Issue")
+                @if(item.Title.Length > 26){
+                    @Html.ActionLink(item.Title.Substring(0, 23)+"...", "Details/" + item.IssueID, "Issue")
+                }
+                else {
+                    @Html.ActionLink(item.Title, "Details/" + item.IssueID, "Issue")
+                }
             </td>
             <td onclick="window.location='Issue/Details/@(item.IssueID)'">
                 @{
-        switch (item.State)
-        {
-            case 0:
+                switch (item.State)
+                {
+                    case 0:
                             <text>Not started</text>
-                break;
-            case 1:
+                        break;
+                    case 1:
                             <text>Started</text>
-                break;
-            case 2:
+                        break;
+                    case 2:
                             <text>Waiting</text>
-                break;
-            case 3:
+                        break;
+                    case 3:
                             <text>Resolved</text>
-                break;
-            case 4:
+                        break;
+                    case 4:
                             <text>Closed</text>
-                break;
-            default:
+                        break;
+                    default:
                             <text>Error</text>
-                break;
-        }
+                        break;
+                }
         }
             </td>
              <td onclick="window.location='Issue/Details/@(item.IssueID)'">
@@ -95,20 +99,19 @@
             <td onclick="window.location='Issue/Details/@(item.IssueID)'">
                 @Html.DisplayFor(model => item.Writer)
             </td>
-            <td><input type="checkbox" value="@item.IssueID" name="reportID" /></td>
         </tr>
-        odd = !odd;
+                odd = !odd;
     }
     }
     </table>
-}
+    }
 <!------------ ISSUE TABLE ---------------->
  <h2>Current issues</h2>
  <table class="list-issues-table" cellspacing="0">
     <tr class="list-issue-header">
         
         <th>
-            ID
+            <a href="?mode=id"><img src="../../Content/media/graphics/triangle.png" alt="ID" />ID</a>
         </th>
         <th>
             <a href="?mode=title"><img src="../../Content/media/graphics/triangle.png" alt="ID" /> Title</a>
@@ -140,27 +143,34 @@
             @Html.DisplayFor(model => item.IssueID)
         </td>
         <td onclick="window.location='Issue/Details/@(item.IssueID)'">
-            @Html.ActionLink(item.Title, "Details/" + item.IssueID, "Issue")
+           @if (item.Title.Length > 26)
+           {
+                    @Html.ActionLink(item.Title.Substring(0, 23) + "...", "Details/" + item.IssueID, "Issue")
+           }
+           else
+           {
+                    @Html.ActionLink(item.Title, "Details/" + item.IssueID, "Issue")
+           }
         </td>
         <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @switch (item.State)
-                {
-                    case 0:
+            {
+                case 0:
                         <text>Not started</text>
                     break;
-                    case 1:
+                case 1:
                         <text>Started</text>
                     break;
-                    case 2:
+                case 2:
                         <text>Waiting</text>
                     break;
-                    case 3:
+                case 3:
                         <text>Resolved</text>
                     break;
-                    case 4:
+                case 4:
                         <text>Closed</text>
                     break;
-                    default:
+                default:
                         <text>Error</text>
                     break;
             }
@@ -183,7 +193,7 @@
         </td>
         <td><input type="checkbox" value="@item.IssueID" name="reportID" /></td>
     </tr>
-                odd1 = !odd1;
+            odd1 = !odd1;
 }
 
 </table>
@@ -223,31 +233,38 @@
             @Html.DisplayFor(model => item.IssueID)
         </td>
         <td>
-            @Html.ActionLink(item.Title, "Details/" + item.IssueID, "Issue")
+            @if (item.Title.Length > 26)
+            {
+                    @Html.ActionLink(item.Title.Substring(0, 23) + "...", "Details/" + item.IssueID, "Issue")
+            }
+            else
+            {
+                    @Html.ActionLink(item.Title, "Details/" + item.IssueID, "Issue")
+            }
         </td>
         <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @{
-                switch (item.State)
-                {
-                    case 0:
+            switch (item.State)
+            {
+                case 0:
                         <text>Not started</text>
                     break;
-                    case 1:
+                case 1:
                         <text>Started</text>
                     break;
-                    case 2:
+                case 2:
                         <text>Waiting</text>
                     break;
-                    case 3:
+                case 3:
                         <text>Resolved</text>
                     break;
-                    case 4:
+                case 4:
                         <text>Closed</text>
                     break;
-                    default:
+                default:
                         <text>Error</text>
                     break;
-                }
+            }
             }
         </td>
          <td onclick="window.location='Issue/Details/@(item.IssueID)'">
@@ -268,7 +285,7 @@
         </td>
         <td><input type="checkbox" value="@item.IssueID" name="reportID" /></td>
     </tr>
-                odd1 = !odd1;
+            odd1 = !odd1;
 }
 
 </table>

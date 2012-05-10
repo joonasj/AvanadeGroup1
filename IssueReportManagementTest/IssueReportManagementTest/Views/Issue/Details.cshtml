@@ -33,6 +33,19 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.cissue.Priority.Name)
     </div>
+
+    <div class="display-label">Assigned to:</div>
+    <div class="display-field">
+        @if (Model.cissue.Employee == "" || Model.cissue.Employee == null)
+        {
+            <text>&nbsp;</text>
+        }
+        else
+        {
+            @Html.DisplayFor(model => model.cissue.Employee)
+        }
+    </div>
+
     <div class="display-label">Attachment:</div>
     <div class="display-field">
         @{
@@ -149,6 +162,6 @@
     }
 }
 <p>
-    <!--@Html.ActionLink("Edit", "Edit", new { id = Model.cissue.IssueID }) |
-    @Html.ActionLink("Back to List", "Index")-->
+    
+    @Html.ActionLink("Back to Issues", "Index")
 </p>

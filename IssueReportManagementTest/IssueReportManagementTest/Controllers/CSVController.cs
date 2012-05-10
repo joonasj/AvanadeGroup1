@@ -18,7 +18,7 @@ namespace IssueReportManagementTest.Controllers
         [HttpPost]
         public ActionResult Download(int[] reportID)
         {
-            csvdata = "Title;Added;Modified;State;Number of activities\n";
+            csvdata = "Title;Added;Modified;State;Assigned to;Number of activities\n";
             List<IssueViewModel> issueViewModels = new List<IssueViewModel>();
             int al = reportID.Length;
             for (int i = 0; i < al; i++)
@@ -33,7 +33,7 @@ namespace IssueReportManagementTest.Controllers
             }
             foreach (IssueViewModel item in issueViewModels)
             {
-                csvdata = csvdata + item.cissue.Title + ";" + item.cissue.Added + ";" + item.cissue.Modiefied + ";" + item.cissue.State + ";" + item.cactivities.Count() + "\n";
+                csvdata = csvdata + item.cissue.Title + ";" + item.cissue.Added + ";" + item.cissue.Modiefied + ";" + item.cissue.State + ";" + item.cissue.Employee + ";" + item.cactivities.Count() + "\n";
             }
             var data = Encoding.UTF8.GetBytes(csvdata);
             string filename = "reports"+DateTime.Today.ToString("dd-MM-yy")+".csv";

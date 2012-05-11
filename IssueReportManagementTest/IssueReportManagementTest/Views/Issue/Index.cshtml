@@ -11,11 +11,107 @@
     @Html.ActionLink("Add new issue", "Create")
 </p>
 @using (Html.BeginForm("GetReport", "Issue", FormMethod.Post)){
+ <!--              EMPLOYEE TABLE                    --->
+    if(@HttpContext.Current.User.IsInRole("Employee")){
+    <h2>My assignments</h2>
+    <table class="list-issues-table" cellspacing="0">
+    <tr class="list-issue-header">
+        
+        <th>
+            <a href="?mode=id"><img src="../../Content/media/graphics/triangle.png" alt="ID" />ID</a>
+        </th>
+        <th>
+            <a href="?mode=title"><img src="../../Content/media/graphics/triangle.png" alt="ID" /> Title</a>
+        </th>
+        <th>
+            <a href="?mode=state"><img src="../../Content/media/graphics/triangle.png" alt="ID" /> State</a>
+        </th>
+        <th>
+            <a href="?mode=priority"><img src="../../Content/media/graphics/triangle.png" alt="ID" /> Priority</a>
+        </th>
+        <th>
+            <a href="?mode=cat"><img src="../../Content/media/graphics/triangle.png" alt="ID" /> Category</a>
+        </th>
+        
+        <th>
+            Added
+        </th>
+        <th>
+            Modiefied
+        </th>
+        <th>Username</th>
+    </tr>
+    @{ var odd = true; }
+    @if (Model.e_lissue.Count() != 0)
+    {
+    foreach (var item in Model.e_lissue)
+    {
+        <tr class="@(odd ? "table-row-odd" : "table-row-even")">
+            <td onclick="window.location='Issue/Details/@(item.IssueID)'">
+                @Html.DisplayFor(model => item.IssueID)
+            </td>
+            <td onclick="window.location='Issue/Details/@(item.IssueID)'">
+                @if(item.Title.Length > 26){
+                    @Html.ActionLink(item.Title.Substring(0, 23)+"...", "Details/" + item.IssueID, "Issue")
+                }
+                else {
+                    @Html.ActionLink(item.Title, "Details/" + item.IssueID, "Issue")
+                }
+            </td>
+            <td onclick="window.location='Issue/Details/@(item.IssueID)'">
+                @{
+                switch (item.State)
+                {
+                    case 0:
+                            <text>Not started</text>
+                        break;
+                    case 1:
+                            <text>Started</text>
+                        break;
+                    case 2:
+                            <text>Waiting</text>
+                        break;
+                    case 3:
+                            <text>Resolved</text>
+                        break;
+                    case 4:
+                            <text>Closed</text>
+                        break;
+                    default:
+                            <text>Error</text>
+                        break;
+                }
+        }
+            </td>
+             <td onclick="window.location='Issue/Details/@(item.IssueID)'">
+                @Html.DisplayFor(model => item.Priority.Name)
+            </td>
+            <td onclick="window.location='Issue/Details/@(item.IssueID)'">
+                @Html.DisplayFor(model => item.Category.Name)
+            </td>
+       
+            <td onclick="window.location='Issue/Details/@(item.IssueID)'">
+                @item.Added.ToString("dd.MM.yy")
+            </td>
+            <td onclick="window.location='Issue/Details/@(item.IssueID)'">
+                @item.Modiefied.ToString("dd.MM.yy")
+            </td>
+            <td onclick="window.location='Issue/Details/@(item.IssueID)'">
+                @Html.DisplayFor(model => item.Writer)
+            </td>
+        </tr>
+                odd = !odd;
+    }
+    }
+    </table>
+    }
+<!------------ ISSUE TABLE ---------------->
+ <h2>Current issues</h2>
  <table class="list-issues-table" cellspacing="0">
     <tr class="list-issue-header">
         
         <th>
-            ID
+            <a href="?mode=id"><img src="../../Content/media/graphics/triangle.png" alt="ID" />ID</a>
         </th>
         <th>
             <a href="?mode=title"><img src="../../Content/media/graphics/triangle.png" alt="ID" /> Title</a>
@@ -39,45 +135,50 @@
         <th>Username</th>
         <th>Select</th>
     </tr>
-@{ var odd = true; }
+@{ var odd1 = true; }
 @foreach (var item in Model.lissue)
 {
-    <tr class="@(odd ? "table-row-odd" : "table-row-even")">
+    <tr class="@(odd1 ? "table-row-odd" : "table-row-even")">
         <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @Html.DisplayFor(model => item.IssueID)
         </td>
         <td onclick="window.location='Issue/Details/@(item.IssueID)'">
-            @Html.ActionLink(item.Title, "Details/" + item.IssueID, "Issue")
+           @if (item.Title.Length > 26)
+           {
+                    @Html.ActionLink(item.Title.Substring(0, 23) + "...", "Details/" + item.IssueID, "Issue")
+           }
+           else
+           {
+                    @Html.ActionLink(item.Title, "Details/" + item.IssueID, "Issue")
+           }
         </td>
         <td onclick="window.location='Issue/Details/@(item.IssueID)'">
-            @{
-                switch (item.State)
-                {
-                    case 0:
+            @switch (item.State)
+            {
+                case 0:
                         <text>Not started</text>
                     break;
-                    case 1:
+                case 1:
                         <text>Started</text>
                     break;
-                    case 2:
+                case 2:
                         <text>Waiting</text>
                     break;
-                    case 3:
+                case 3:
                         <text>Resolved</text>
                     break;
-                    case 4:
+                case 4:
                         <text>Closed</text>
                     break;
-                    default:
+                default:
                         <text>Error</text>
                     break;
-                }
             }
         </td>
          <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @Html.DisplayFor(model => item.Priority.Name)
         </td>
-        <td>
+        <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @Html.DisplayFor(model => item.Category.Name)
         </td>
        
@@ -92,7 +193,7 @@
         </td>
         <td><input type="checkbox" value="@item.IssueID" name="reportID" /></td>
     </tr>
-                odd = !odd;
+            odd1 = !odd1;
 }
 
 </table>
@@ -127,36 +228,43 @@
     </tr>
 @foreach (var item in Model.a_lissue)
 {
-    <tr class="@(odd ? "table-row-odd" : "table-row-even")">
+    <tr class="@(odd1 ? "table-row-odd" : "table-row-even")">
         <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @Html.DisplayFor(model => item.IssueID)
         </td>
         <td>
-            @Html.ActionLink(item.Title, "Details/" + item.IssueID, "Issue")
+            @if (item.Title.Length > 26)
+            {
+                    @Html.ActionLink(item.Title.Substring(0, 23) + "...", "Details/" + item.IssueID, "Issue")
+            }
+            else
+            {
+                    @Html.ActionLink(item.Title, "Details/" + item.IssueID, "Issue")
+            }
         </td>
         <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @{
-                switch (item.State)
-                {
-                    case 0:
+            switch (item.State)
+            {
+                case 0:
                         <text>Not started</text>
                     break;
-                    case 1:
+                case 1:
                         <text>Started</text>
                     break;
-                    case 2:
+                case 2:
                         <text>Waiting</text>
                     break;
-                    case 3:
+                case 3:
                         <text>Resolved</text>
                     break;
-                    case 4:
+                case 4:
                         <text>Closed</text>
                     break;
-                    default:
+                default:
                         <text>Error</text>
                     break;
-                }
+            }
             }
         </td>
          <td onclick="window.location='Issue/Details/@(item.IssueID)'">
@@ -177,7 +285,7 @@
         </td>
         <td><input type="checkbox" value="@item.IssueID" name="reportID" /></td>
     </tr>
-                odd = !odd;
+            odd1 = !odd1;
 }
 
 </table>

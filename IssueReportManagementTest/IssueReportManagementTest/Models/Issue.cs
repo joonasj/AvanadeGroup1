@@ -40,5 +40,7 @@ namespace IssueReportManagementTest.Models
         public string IssueFileURL { get; set; }
         public string IssueFileExtension { get; set; }
 
+        public string Employee { get; set; }
+
     }
 }

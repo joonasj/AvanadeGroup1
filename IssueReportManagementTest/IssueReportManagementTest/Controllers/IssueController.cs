@@ -21,7 +21,7 @@ namespace IssueReportManagementTest.Controllers
     {
         private IssueContext db = new IssueContext();
         private SmtpClient smtps = new SmtpClient("smtp.gmail.com", 587);
-        private string csvdata;
+        //private string csvdata;
 
         //
         // GET: /Issue/
@@ -33,15 +33,21 @@ namespace IssueReportManagementTest.Controllers
             //string query = "SELECT * FROM Issue WHERE Writer='" + System.Web.HttpContext.Current.User.Identity.Name + "' ORDER BY State ASC";
             string query = "";
             string a_query = "";//for "closed" issues
+            string e_query = ""; //for employee issues
             //ViewBag.Message = "Welcome to ASP.NET MVC!";
+            string cuser = System.Web.HttpContext.Current.User.Identity.Name;
             if (System.Web.HttpContext.Current.User.IsInRole("Customer"))
             {
-                string cuser = System.Web.HttpContext.Current.User.Identity.Name;
+                
 
                 if (mode != null)
                 {
                     switch (mode)
                     {
+                        case "id":
+                            query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State<'4' ORDER BY IssueID DESC";
+                            a_query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State='4' ORDER BY IssueID DESC";
+                            break;
                         case "state":
                             query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State<'4' ORDER BY State ASC";
                             a_query = "SELECT * FROM Issue WHERE Writer='" + cuser + "' AND State='4' ORDER BY State ASC";
@@ -82,25 +88,35 @@ namespace IssueReportManagementTest.Controllers
                 {
                     switch (mode)
                     {
+                        case "id":
+                            query = "SELECT * FROM Issue WHERE State<'4' ORDER BY IssueID DESC";
+                            a_query = "SELECT * FROM Issue WHERE State='4' ORDER BY IssueID DESC";
+                            e_query = "SELECT * FROM Issue WHERE State<'4' AND Employee='" + cuser + "' ORDER BY IssueID DESC";
+                            break;
                         case "state":
                             query = "SELECT * FROM Issue WHERE State<'4' ORDER BY State ASC";
                             a_query = "SELECT * FROM Issue WHERE State='4' ORDER BY State ASC";
+                            e_query = "SELECT * FROM Issue WHERE State<'4' AND Employee='"+cuser+"' ORDER BY State ASC";
                             break;
                         case "cat":
                             query = "SELECT * FROM Issue WHERE State<'4' ORDER BY CategoryID ASC";
                             a_query = "SELECT * FROM Issue WHERE State='4' ORDER BY CategoryID ASC";
+                            e_query = "SELECT * FROM Issue WHERE State<'4' AND Employee='" + cuser + "' ORDER BY CategoryID ASC";
                             break;
                         case "priority":
                             query = "SELECT * FROM Issue WHERE State<'4' ORDER BY PriorityID DESC";
                             a_query = "SELECT * FROM Issue WHERE State='4' ORDER BY PriorityID DESC";
+                            e_query = "SELECT * FROM Issue WHERE State<'4' AND Employee='" + cuser + "' ORDER BY PriorityID ASC";
                             break;
                         case "title":
                             query = "SELECT * FROM Issue WHERE State<'4' ORDER BY Title ASC";
                             a_query = "SELECT * FROM Issue WHERE State='4' ORDER BY Title ASC";
+                            e_query = "SELECT * FROM Issue WHERE State<'4' AND Employee='" + cuser + "' ORDER BY Title ASC";
                             break;
                         default:
                             query = "SELECT * FROM Issue WHERE State<'4' ORDER BY State ASC";
                             a_query = "SELECT * FROM Issue WHERE State='4' ORDER BY State ASC";
+                            e_query = "SELECT * FROM Issue WHERE State<'4' AND Employee='" + cuser + "' ORDER BY State ASC";
                             break;
                     }
                 }
@@ -108,11 +124,13 @@ namespace IssueReportManagementTest.Controllers
                 {
                     query = "SELECT * FROM Issue WHERE State<'4' ORDER BY State ASC";
                     a_query = "SELECT * FROM Issue WHERE State='4' ORDER BY State ASC";
+                    e_query = "SELECT * FROM Issue WHERE State<'4' AND Employee='" + cuser + "' ORDER BY State ASC";
                 }
                 var listIssueviewModel = new IssueListViewModel
                 {
                     lissue = db.Issues.SqlQuery(query),
-                    a_lissue = db.Issues.SqlQuery(a_query)
+                    a_lissue = db.Issues.SqlQuery(a_query),
+                    e_lissue = db.Issues.SqlQuery(e_query)
                 };
                 return View(listIssueviewModel);
 
@@ -271,6 +289,13 @@ namespace IssueReportManagementTest.Controllers
         [HttpPost]
         public ActionResult Update(FormCollection c)
         {
+            //Employees
+            string old_employee = c["cissue.Employee"];
+            string employee = c["assign"];
+            if (System.Web.HttpContext.Current.User.IsInRole("Employee")) 
+            {
+                employee = old_employee;
+            }
             //Issue ID
             int id = Convert.ToInt16(c["cissue.IssueID"]);
             //Old state
@@ -279,9 +304,39 @@ namespace IssueReportManagementTest.Controllers
             int n_state = Convert.ToInt16(c["new-state"]);
             //Activity content
             string ac_content = c["new_activity"];
+            //Changes for employee assignment
+            string assignment_str = "";
+            if (old_employee != employee)
+            {
+                if (old_employee == "" || old_employee == null)
+                {
+                    if (employee == "" || employee == null)
+                    {
+                        assignment_str = "This issue isn't assigned to anyone.<br />\n";
+                    }
+                    else
+                    {
+                        assignment_str = "This issue has been assigned to " + employee + ".<br />\n";
+                    }
+                }
+                else
+                {
+                    if (employee == "" || employee == null)
+                    {
+                        assignment_str = "This issue isn't assigned to anyone.<br />\n";
+                    }
+                    else
+                    {
+                        assignment_str = "This issue has been assigned to " + employee + " from " + old_employee + ".<br />\n";
+                    }
+                }
+            }
+            
+            
             //Changes to status
             string status_str = "";
             string parsed_content = "";
+            
             if (o_state != n_state)
             {
                 switch (o_state)
@@ -357,7 +412,7 @@ namespace IssueReportManagementTest.Controllers
                 }
                 
                 //parse the message
-                parsed_content = status_str + ac_content;
+                parsed_content = assignment_str + status_str + ac_content;
                 ac_content = parsed_content;
 
                 if (n_state == 4)
@@ -390,10 +445,10 @@ namespace IssueReportManagementTest.Controllers
 
                 }
 
-                var issue_sql = @"UPDATE [Issue] SET State = {0}, Modiefied = {1} WHERE IssueID = {2}";
+                var issue_sql = @"UPDATE [Issue] SET State = {0}, Modiefied = {1}, Employee = {2} WHERE IssueID = {3}";
                 var activity_sql = @"INSERT INTO [Activity] (IssueID, Added, Employee, Context) VALUES ({0}, {1}, {2}, {3})";
                
-                db.Database.ExecuteSqlCommand(issue_sql, n_state, mod, id);
+                db.Database.ExecuteSqlCommand(issue_sql, n_state, mod, employee, id);
                 db.Database.ExecuteSqlCommand(activity_sql, id, mod, c_employee, ac_content);
                
                 return RedirectToAction("Index");

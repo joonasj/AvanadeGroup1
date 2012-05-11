@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Report";
 }
-<img src="../../Content/media/graphics/printer_48.png" style="float: right; cursor:pointer;" class="hide-printer" onload="showPrinter()" onclick="printDiv('print-issue-report')" title="Print the reports"/>
+<img src="../../Content/media/graphics/printer_48.png" alt="Print" style="float: right; cursor:pointer;" class="hide-printer" onload="showPrinter()" onclick="printDiv('print-issue-report')" title="Print the reports"/>
 @using (Html.BeginForm("Download", "CSV"))
 {
 <div id="print-issue-report">
@@ -17,34 +17,35 @@
         <p>Added: @item.cissue.Added.ToString("dd.MM.yy")</p>
         <p>Last modification: @item.cissue.Modiefied.ToString("dd.MM.yy")</p>
         <p>State:  @{
-                switch (item.cissue.State)
-                {
-                    case 0:
+    switch (item.cissue.State)
+    {
+        case 0:
                         <text>Not started</text>
-                    break;
-                    case 1:
+            break;
+        case 1:
                         <text>Started</text>
-                    break;
-                    case 2:
+            break;
+        case 2:
                         <text>Waiting</text>
-                    break;
-                    case 3:
+            break;
+        case 3:
                         <text>Resolved</text>
-                    break;
-                    case 4:
+            break;
+        case 4:
                         <text>Closed</text>
-                    break;
-                    default:
+            break;
+        default:
                         <text>Error</text>
-                    break;
-                }
+            break;
+    }
             }</p>
+        <p>Assigned to: @item.cissue.Employee</p>
         <p>Number of activities: @item.cactivities.Count()</p>
     </div>
 }
 
 </div>
-<div id="report-download-cvs"><input type="submit" value="Download cvs" /></div>
+<div id="report-download-cvs"><input type="submit" value="Download csv" /></div>
 }
 <div><p>@Html.ActionLink("Back to issues", "Index", "Issue")</p></div>
 

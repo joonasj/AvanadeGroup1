@@ -292,6 +292,10 @@ namespace IssueReportManagementTest.Controllers
             //Employees
             string old_employee = c["cissue.Employee"];
             string employee = c["assign"];
+            if (System.Web.HttpContext.Current.User.IsInRole("Employee")) 
+            {
+                employee = old_employee;
+            }
             //Issue ID
             int id = Convert.ToInt16(c["cissue.IssueID"]);
             //Old state

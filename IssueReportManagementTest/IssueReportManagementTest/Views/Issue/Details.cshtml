@@ -124,13 +124,17 @@
     {
         if (@HttpContext.Current.User.IsInRole("Administrator"))
         {
+            <div class="display-label"><label for="assign-issue">Assign issue to: </label></div>
+            <div class="editor-field">
             <select name="assign">
+            @if(Model.cissue.Employee != ""){<option value="@Model.cissue.Employee">@Model.cissue.Employee</option>}
             <option value="">None</option>
             @foreach (var emp in Roles.GetUsersInRole("Employee"))
             {
                 <option value="@emp">@emp</option>
             }
             </select>
+            </div>
         }
         <h2 style="line-height: 48px; font-size: 14px;"><img src="../../Content/media/graphics/app_48.png" alt="" style="float: left; border: none;" />Add new activity</h2>
         @Html.HiddenFor(model => model.cissue.Employee)

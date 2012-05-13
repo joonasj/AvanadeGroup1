@@ -124,13 +124,17 @@
     {
         if (@HttpContext.Current.User.IsInRole("Administrator"))
         {
-            <select name="assign">
+            <div class="display-label"><label for="assign-issue">Assign issue to: </label></div>
+            <div class="editor-field">
+            <select name="assign" id="assign-issue">
+            @if(Model.cissue.Employee != ""){<option value="@Model.cissue.Employee">@Model.cissue.Employee</option>}
             <option value="">None</option>
             @foreach (var emp in Roles.GetUsersInRole("Employee"))
             {
                 <option value="@emp">@emp</option>
             }
             </select>
+            </div>
         }
         <h2 style="line-height: 48px; font-size: 14px;"><img src="../../Content/media/graphics/app_48.png" alt="" style="float: left; border: none;" />Add new activity</h2>
         @Html.HiddenFor(model => model.cissue.Employee)
@@ -157,6 +161,8 @@
                 <textarea name="new_activity" rows="5" cols="12" id="new_activity"></textarea>
             </div>
             <div class="display-label"></div>
+            <div class="display-label"><label for="email-customer">Send email notification: </label></div>
+            <div class="editor-field"><input type="checkbox" id="email-customer" name="c-email" value="1" /></div>
             <p><input type="submit" value="Add new activity" /></p>
         </fieldset>
     }

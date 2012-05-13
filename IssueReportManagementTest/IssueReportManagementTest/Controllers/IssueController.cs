@@ -289,6 +289,8 @@ namespace IssueReportManagementTest.Controllers
         [HttpPost]
         public ActionResult Update(FormCollection c)
         {
+            //send information to customer
+            string send_email = c["c-email"];
             //Employees
             string old_employee = c["cissue.Employee"];
             string employee = c["assign"];
@@ -308,6 +310,7 @@ namespace IssueReportManagementTest.Controllers
             string assignment_str = "";
             if (old_employee != employee)
             {
+<<<<<<< HEAD
                 //Send notification to employee
                 string issueURL = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
                 MembershipUser cms = Membership.GetUser(employee);
@@ -329,6 +332,38 @@ namespace IssueReportManagementTest.Controllers
                 smtps.EnableSsl = true;
                 //Send
                 smtps.Send(e_msg);
+=======
+                if (employee != "") {
+                    //Send email notification
+                    MembershipUser cms = Membership.GetUser(employee);
+                    //employee info
+                    MembershipUser ems = Membership.GetUser(System.Web.HttpContext.Current.User.Identity.Name);
+                    //mail(from, to)
+                    MailMessage e_msg = new MailMessage(ems.Email, cms.Email);
+                    //Subject
+                    e_msg.Subject = "IRM: Issue " + id + " has been assigned to you";
+                    //String for domain and port
+                    string issueURL = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port) + "/Issue/Details/" + id;
+
+                    //Body
+                    e_msg.Body = "Issue " + id + "has been assigned to you.\nLink to issue "+issueURL+"\n";
+
+                    //Definitions
+
+                    //System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
+
+                    smtps.UseDefaultCredentials = false;
+                    smtps.Credentials = new NetworkCredential("avanadg1@gmail.com", "3l173h4x");
+                    smtps.EnableSsl = true;
+                    //Send
+                    try
+                    {
+                        smtps.Send(e_msg);
+                    }
+                    catch { 
+                    }
+                }
+>>>>>>> 0a3ebedd1fda61f61e15517f292c258703f5f3e4
 
                 if (old_employee == "" || old_employee == null)
                 {
@@ -436,35 +471,68 @@ namespace IssueReportManagementTest.Controllers
                 //parse the message
                 parsed_content = assignment_str + status_str + ac_content;
                 ac_content = parsed_content;
-
-                if (n_state == 4)
+                //If state is closed or employee/administrator wants to send email notification to user
+                if (n_state == 4 || send_email == "1")
                 {
-                    //If issue has been closed, this message is sent
-                    //Customer data
-                    Issue cu_issue = new Issue();
-                    cu_issue = db.Issues.Find(id);
-                    //customer info
-                    MembershipUser cms = Membership.GetUser(cu_issue.Writer);
-                    //employee info
-                    MembershipUser ems = Membership.GetUser(c_employee);
-                    //mail(from, to)
-                    MailMessage e_msg = new MailMessage(ems.Email, cms.Email);
-                    //Subject
-                    e_msg.Subject = "IRM: Issue "+id+" has been archived";
-                    //Body
-                    e_msg.Body = "Dear customer "+cu_issue.Writer+".\nYour issue id: "+cu_issue.IssueID+" has been resolved and archived by our employee "+c_employee+".\n"+c_employee+" message: "+ac_content+".\nContact: "+ems.Email+".";
-                    
-                    //Definitions
+                    if (n_state == 4)
+                    {
+                        //If issue has been closed, this message is sent
+                        //Customer data
+                        Issue cu_issue = new Issue();
+                        cu_issue = db.Issues.Find(id);
+                        //customer info
+                        MembershipUser cms = Membership.GetUser(cu_issue.Writer);
+                        //employee info
+                        MembershipUser ems = Membership.GetUser(c_employee);
+                        //mail(from, to)
+                        MailMessage e_msg = new MailMessage(ems.Email, cms.Email);
+                        //String to issue
+                        string issueURL = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port) + "/Issue/Details/" + id;
+                        //Subject
+                        e_msg.Subject = "IRM: Issue " + id + " has been archived";
+                        //Body
+                        e_msg.Body = "Dear customer " + cu_issue.Writer + ".\nYour issue id: " + cu_issue.IssueID + " has been resolved and archived by our employee " + c_employee + ".\nLink to issue " + issueURL + "\n" + c_employee + " message: " + ac_content + ".\nContact: " + ems.Email + ".";
 
-                    //System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
-                    
-                    smtps.UseDefaultCredentials = false;
-                    smtps.Credentials = new NetworkCredential("avanadg1@gmail.com", "3l173h4x");
-                    smtps.EnableSsl = true;
-                    //Send
-                    smtps.Send(e_msg);
-                    //client.Send(e_msg);
+                        //Definitions
 
+                        //System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
+
+                        smtps.UseDefaultCredentials = false;
+                        smtps.Credentials = new NetworkCredential("avanadg1@gmail.com", "3l173h4x");
+                        smtps.EnableSsl = true;
+                        //Send
+                        smtps.Send(e_msg);
+                        //client.Send(e_msg);
+                    }
+                    else
+                    {
+                        //If issue has been closed, this message is sent
+                        //Customer data
+                        Issue cu_issue = new Issue();
+                        cu_issue = db.Issues.Find(id);
+                        //customer info
+                        MembershipUser cms = Membership.GetUser(cu_issue.Writer);
+                        //employee info
+                        MembershipUser ems = Membership.GetUser(c_employee);
+                        //mail(from, to)
+                        MailMessage e_msg = new MailMessage(ems.Email, cms.Email);
+                        //String to issue
+                        string issueURL = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port) + "/Issue/Details/" + id;
+                        //Subject
+                        e_msg.Subject = "IRM: Issue " + id;
+                        //Body
+                        e_msg.Body = "Link to issue " + issueURL + "\n" + c_employee + " message: " + ac_content + ".\nContact: " + ems.Email + ".";
+
+                        //Definitions
+
+                        //System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
+
+                        smtps.UseDefaultCredentials = false;
+                        smtps.Credentials = new NetworkCredential("avanadg1@gmail.com", "3l173h4x");
+                        smtps.EnableSsl = true;
+                        //Send
+                        smtps.Send(e_msg);
+                    }
                 }
 
                 var issue_sql = @"UPDATE [Issue] SET State = {0}, Modiefied = {1}, Employee = {2} WHERE IssueID = {3}";

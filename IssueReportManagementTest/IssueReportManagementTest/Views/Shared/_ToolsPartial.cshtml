@@ -2,10 +2,10 @@
 {
     <ul class="main-menu">
                     <!--<li><a href="@Url.Action("Index", "Home")" class="link"><b>Home</b></a></li>-->
-                    <li><a href="@Url.Action("Index", "Issue")" class="link"><b>Issue</b></a></li>
+                    <li id="Issue"><a href="@Url.Action("Index", "Issue")" class="link" ><b>Issue</b></a></li>
                     @if(@HttpContext.Current.User.IsInRole("Administrator")){
-                        <li><a href="@Url.Action("Index", "Category")" class="link"><b>Categories</b></a></li>
-                        <li><a href="@Url.Action("Index", "Priority")" class="link"><b>Priorities</b></a></li>
+                        <li id="Category"><a href="@Url.Action("Index", "Category")" class="link" ><b>Categories</b></a></li>
+                        <li id="Priority"><a href="@Url.Action("Index", "Priority")" class="link" ><b>Priorities</b></a></li>
                     }
                     <!--<li id="file_link">@Html.ActionLink("Home", "Index", "Home", null, new { @htmlTag = "<b>" })</li>
                     <li id="file_link">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "link" })</li>

@@ -310,29 +310,6 @@ namespace IssueReportManagementTest.Controllers
             string assignment_str = "";
             if (old_employee != employee)
             {
-<<<<<<< HEAD
-                //Send notification to employee
-                string issueURL = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
-                MembershipUser cms = Membership.GetUser(employee);
-                //employee info
-                MembershipUser ems = Membership.GetUser(System.Web.HttpContext.Current.User.Identity.Name);
-                //mail(from, to)
-                MailMessage e_msg = new MailMessage(ems.Email, cms.Email);
-                //Subject
-                e_msg.Subject = "IRM: Issue " + id + " has been assigned to you";
-                //Body
-                e_msg.Body = "You have been assigned issue " + id + ".\nPlease contact IRM system administrator for more information.\n" + ems.Email + "\nLink to issue: "+issueURL+"/Issue/Details/"+id+"\n";
-
-                //Definitions
-
-          
-
-                smtps.UseDefaultCredentials = false;
-                smtps.Credentials = new NetworkCredential("avanadg1@gmail.com", "3l173h4x");
-                smtps.EnableSsl = true;
-                //Send
-                smtps.Send(e_msg);
-=======
                 if (employee != "") {
                     //Send email notification
                     MembershipUser cms = Membership.GetUser(employee);
@@ -363,7 +340,6 @@ namespace IssueReportManagementTest.Controllers
                     catch { 
                     }
                 }
->>>>>>> 0a3ebedd1fda61f61e15517f292c258703f5f3e4
 
                 if (old_employee == "" || old_employee == null)
                 {

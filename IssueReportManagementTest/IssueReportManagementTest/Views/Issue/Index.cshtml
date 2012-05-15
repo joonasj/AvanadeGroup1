@@ -232,7 +232,7 @@
         <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @Html.DisplayFor(model => item.IssueID)
         </td>
-        <td>
+        <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @if (item.Title.Length > 26)
             {
                     @Html.ActionLink(item.Title.Substring(0, 23) + "...", "Details/" + item.IssueID, "Issue")
@@ -270,14 +270,14 @@
          <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @Html.DisplayFor(model => item.Priority.Name)
         </td>
-        <td>
+        <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @Html.DisplayFor(model => item.Category.Name)
         </td>
        
         <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @item.Added.ToString("dd.MM.yy")
         </td>
-        <td>
+        <td onclick="window.location='Issue/Details/@(item.IssueID)'">
             @item.Modiefied.ToString("dd.MM.yy")
         </td>
         <td onclick="window.location='Issue/Details/@(item.IssueID)'">

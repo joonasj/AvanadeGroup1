@@ -142,9 +142,17 @@ namespace IssueReportManagementTest.Controllers
         //
         // GET: /Issue/Details/5
         [Authorize(Roles = "Administrator, Employee, Customer")]
-        public ViewResult Details(int id)
+        public ActionResult Details(int id)
         {
             Issue issue = db.Issues.Find(id);
+            //check that customer cannot read other issues
+            if (System.Web.HttpContext.Current.User.IsInRole("Customer"))
+            {
+                if (issue.Writer != System.Web.HttpContext.Current.User.Identity.Name)
+                {
+                    return RedirectToAction("Index", "Issue");
+                }
+            }
             string current_state;
             switch (issue.State)
             {
